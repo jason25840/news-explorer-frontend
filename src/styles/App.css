@@ -1,0 +1,16 @@
+.app_page {
+  background-color: white;
+  margin: 0 auto;
+}
+
+.app_page-content {
+  color: white;
+  background-image: url('../images/main-image.png');
+  max-width: 1440px;
+  height: 576px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+

@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "Roboto Slab";
+    src: url('../fonts/roboto-slab-400-regular.woff') format('woff'),
+    url('../fonts/roboto-slab-400-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../fonts/roboto-400-regular.woff') format('woff'),
+    url('../fonts/roboto-400-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.about_content {
+    display: flex;
+    padding: 0;
+    max-width: 1440px;
+    height: 624px;
+    padding: 0 40px;
+    gap: 56px;
+}
+
+.about_rounded-image {
+    width: 464px;
+    height: 464px;
+    border-radius: 50%;
+    object-fit: cover; 
+    margin: 80px 0;
+  }
+
+  .about_heading {
+    margin: 131px 0 24px 0;
+    font-family: Roboto Slab;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 46px;
+    text-align: left;
+    color: #1A1B22;
+  }
+
+  .about_description {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    max-width: 600px;
+    height: auto;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    color: #1A1B22;
+    gap: 24px;
+  }
+
+  .author-bio {
+    margin: 0;
+  }
+
+  .tripleten-talk {
+    margin: 0;
+  }
+  
