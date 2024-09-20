@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import '../styles/App.css';
 import { BrowserRouter as Router, /*Routes, Route*/ } from 'react-router-dom';
 import Header from './Header'; 
-import SearchForm from './SearchForm';  
-/*import Main from './Main';*/
+//import SearchForm from './SearchForm';  
+import Main from './Main';
 import About from './About';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm'; 
@@ -14,6 +14,8 @@ import SuccessPopup from './SuccessPopup';
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({ name: 'John' });
   //const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenLoginPopup = () => {
@@ -30,6 +32,18 @@ function App() {
   
   const handleActiveModalClose = () => {
     setActiveModal("");
+  };
+
+  const handleLogin = (email, password) => {
+    console.log("Logging in with email:", email);
+    setUser({ name: "John", email }); 
+    setIsLoggedIn(true);
+    setActiveModal(""); 
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUser(null);
   };
   
 
@@ -54,8 +68,12 @@ function App() {
       <div className="app_page-content">
           <Header 
           handleOpenLoginPopup={handleOpenLoginPopup} 
+          isLoggedIn={isLoggedIn}
+          user={user}
+          handleLogin={handleLogin} 
+          handleLogout={handleLogout}
           />
-          <SearchForm />
+          <Main />
           <PopupWithForm />
       </div>
       <About />
@@ -64,7 +82,7 @@ function App() {
           //title="login"
           isOpen={activeModal === "login"}
           handleActiveModalClose={handleActiveModalClose}
-          //handleLogin={handleLogin}
+          handleLogin={handleLogin}
           handleOpenSignupPopup={handleOpenSignupPopup}
           //handleSubmit={handleSubmit}
           //isLoading={isLoading}

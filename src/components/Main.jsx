@@ -22,9 +22,9 @@ const Main = () => {
     };
    // Fetch news data based on the keyword and update the state
     return ( 
-        <div className="main_page-content">
-            <h1 className="main_page-header">What's going on in the world?</h1>
-                <p className="main_page-description">Find the latest news on any topic and save them in your personal account.</p>
+        <div className="main-page__content">
+            <h1 className="main-page__header">What's going on in the world?</h1>
+                <p className="main-page__description">Find the latest news on any topic and save them in your personal account.</p>
                 {/* Search bar */}
             <KeywordSearch onSearch={handleSearch} />
 

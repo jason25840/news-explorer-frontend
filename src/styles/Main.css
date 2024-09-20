@@ -1,1 +1,45 @@
+@font-face {
+    font-family: "Roboto Slab";
+    src: url('../fonts/roboto-slab-400-regular.woff') format('woff'),
+    url('../fonts/roboto-slab-400-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url('../fonts/roboto-400-regular.woff') format('woff'),
+    url('../fonts/roboto-400-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.main-page__content {
+    display: flex;
+    flex-direction: column;
+    padding: 80px 0;
+    align-items: left;
+    max-width: 608px;
+    height: fit-content;
+    margin: auto;
+    gap: 32px;
+}
+
+.main-page__header {
+    margin: 0;
+    font-family: Roboto Slab;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 64px;
+    text-align: left;
+}
+
+.main-page__description {
+    margin: 0 auto 88px;
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+}
 

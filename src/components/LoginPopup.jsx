@@ -7,9 +7,8 @@ import PopupWithForm from "./PopupWithForm";
 const LoginPopup = ({
   isOpen,
   handleActiveModalClose,
-  //handleLogin,
+  handleLogin,
   handleOpenSignupPopup,
-  //handleSubmit,
   //isLoading,
 }) => {
   const {
@@ -29,8 +28,11 @@ const LoginPopup = ({
       resetForm();
     }
   }, [isOpen, resetForm]);
-  //const handleFormSubmit = (e) => {
-  //  e.preventDefault();
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleLogin(values.email, values.password);
+  }
   //  if (isValid) {
    //   const makeRequest = () => handleLogin(values);
    //   handleSubmit(makeRequest);
@@ -42,7 +44,7 @@ const LoginPopup = ({
       title="Sign in"
       isOpen={isOpen}
       handleActiveModalClose={handleActiveModalClose}
-      //onSubmit={handleFormSubmit}
+      onSubmit={handleFormSubmit}
     >
       <label
         className="popup__label"
@@ -90,6 +92,7 @@ const LoginPopup = ({
           type="submit"
           className={`popup__submit-btn ${isValid ? "popup__submit-btn_active" : ""}`}
           disabled={!isValid}
+          onClick={handleFormSubmit}
         >
           Sign in
         </button>

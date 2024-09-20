@@ -1,0 +1,225 @@
+.news-card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .news__keyword {
+    background-color: white;
+    padding: 8px 22px;
+    text-align: center;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: black;
+    border-radius: 10px;
+    position: absolute;
+    top: 11px;
+    left: 24px;
+  }
+  
+  .news__popup-text {
+    background-color: white;
+    padding: 8px 22px;
+    border-radius: 8px;
+    text-align: center;
+    position: absolute;
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.7;
+    text-align: center;
+    margin-left: 150px;
+    margin-top: 24px;
+  }
+  
+  .news__popup-text_hidden {
+    display: none;
+  }
+  
+  .news__button-delete {
+    background: url(../../assets/Delete-button.svg);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    cursor: pointer;
+  }
+  
+  .news__button-delete:hover {
+    cursor: pointer;
+  }
+  
+  .news__button-bookmark {
+    background: transparent url(../../assets/BookMark.svg);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: none;
+    position: absolute;
+    margin-left: 340px;
+    margin-top: 24px;
+    cursor: pointer;
+  }
+  
+  .news__button-bookmark:hover {
+    background: transparent url(../../assets/BookMark-Hover.svg);
+  }
+  
+  .news__button-bookmark_marked {
+    background: transparent url(../../assets/BookMark-Clicked.svg);
+  }
+  
+  .news-card__link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .news-card__image {
+    width: 400px;
+    height: 272px;
+  }
+  
+  .news-card__text {
+    text-align: left;
+    margin: 0 24px;
+  }
+  
+  .news-card__date {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 24px;
+    font-weight: 400;
+    color: #b6bcbf;
+    margin-top: 17px;
+  }
+  
+  .news-card__title {
+    font-family: Roboto-Slab, Arial, sans-serif;
+    font-size: 26px;
+    line-height: 30px;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
+    margin-top: 15px;
+    height: 60px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  
+  .news-card__description {
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
+    margin-top: 16px;
+    height: 6.9em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+  
+  .news-card__source {
+    font-family: Roboto-Slab, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    line-height: 20px;
+    font-weight: 700;
+    color: #b6bcbf;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .news-card {
+      width: 220px;
+    }
+  
+    .news-card__image {
+      width: 224px;
+      height: 150px;
+    }
+  
+    .news__keyword {
+      left: 10px;
+      top: 0;
+    }
+  
+    .news__button-delete {
+      top: 10px;
+      right: 10px;
+    }
+  
+    .news__button-bookmark {
+      margin-left: 165px;
+      margin-top: 10px;
+    }
+  
+    .news-card__date {
+      margin-top: 13px;
+    }
+  
+    .news-card__title {
+      font-size: 22px;
+      line-height: 26px;
+      height: 52px;
+    }
+  
+    .news-card__description {
+      font-size: 14px;
+      line-height: 20px;
+      height: 5.4em;
+    }
+  
+    .news-card__source {
+      font-size: 14px;
+      line-height: 18px;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .news-card {
+      width: 330px;
+    }
+  
+    .news-card__image {
+      width: 100%;
+      height: 200px;
+    }
+  
+    .news__keyword {
+      left: 10px;
+    }
+  
+    .news__button-bookmark {
+      margin-left: calc(100% - 50px);
+    }
+  
+    .news-card__title {
+      font-size: 22px;
+      line-height: 24px;
+      height: 50px;
+    }
+  
+    .news-card__description {
+      font-size: 16px;
+      line-height: 22px;
+      height: auto;
+    }
+  
+    .news-card__source {
+      font-size: 16px;
+      line-height: 20px;
+    }
+  }
