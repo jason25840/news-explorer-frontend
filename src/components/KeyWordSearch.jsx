@@ -10,15 +10,15 @@ const KeywordSearch = ({ onSearch }) => {
     };
   
     return (
-      <form onSubmit={handleSearch} className="keyword-search-form">
+      <form onSubmit={handleSearch} className="keyword__search-form">
       <input
           type="search"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
           placeholder="Enter topic"
-          className="keyword-search-input" 
+          className="keyword__search-input" 
       />
-      <button type="submit" className="search-button">Search</button> 
+      <button type="submit" className="keyword__search-button">Search</button> 
       </form>
     );
   };

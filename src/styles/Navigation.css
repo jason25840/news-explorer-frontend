@@ -53,3 +53,25 @@
 .nav_signin-button::hover {
     opacity: 0.8; 
 }
+
+.nav_saved-articles {
+    font-family: Roboto;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #B6BCBF;
+
+}
+
+.nav_user-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #FFFFFF;
+    border-radius: 35px;
+    width: 112px;
+    height: 48px;
+    gap: 5px;
+}
