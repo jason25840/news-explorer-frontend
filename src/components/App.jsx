@@ -84,7 +84,6 @@ function App() {
         handleActiveModalClose={handleActiveModalClose}
         handleOpenLoginPopup={handleOpenLoginPopup}
       />
-      <About />
       <Footer />
     </div>
     </Router>

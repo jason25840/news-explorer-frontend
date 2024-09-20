@@ -122,9 +122,9 @@
 }
 
 .popup__input_invalid {
+    margin: 0;
     color: red;
 }
-
 
 .popup__submit-btn-container {
     width: 100%;

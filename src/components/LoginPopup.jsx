@@ -62,7 +62,7 @@ const LoginPopup = ({
           maxLength="40"
           required
         />
-        {errors.email && <p className="popup__error">{errors.email}</p>}
+        {errors.email && <p className="popup__input_invalid">{errors.email}</p>}
       </label>
 
       <label
@@ -83,7 +83,7 @@ const LoginPopup = ({
           maxLength="16"
           required
         />
-        {errors.password && <p className="popup__error">{errors.password}</p>}
+        {errors.password && <p className="popup__input_invalid">{errors.password}</p>}
       </label>
       <div className="popup__submit-btn-container">
         <button
