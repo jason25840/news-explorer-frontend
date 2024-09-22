@@ -7,9 +7,9 @@ import PopupWithForm from "./PopupWithForm";
 const SignupPopup = ({
   isOpen,
   handleActiveModalClose,
-  //handleRegistration,
+  handleRegistration,
   handleOpenLoginPopup,
-  //handleSubmit,
+  handleOpenSuccessPopup,
   //isLoading,
 }) => {
     const {
@@ -26,21 +26,26 @@ const SignupPopup = ({
       resetForm();
     }
   }, [isOpen, resetForm]);
-  //const handleFormSubmit = (e) => {
-  //  e.preventDefault();
-   // if (isValid) {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
   //    const makeRequest = () => handleRegistration(values);
-//
-  //    handleSubmit(makeRequest);
-   // }
-  //};
+    handleRegistration(values)
+      .then(() => {
+      handleOpenSuccessPopup();
+  })
+  .catch((error) => {
+    console.log("Registration failed:", error);
+  });
+}
+};
 
   return (
     <PopupWithForm
       title="Sign up"
       isOpen={isOpen}
       handleActiveModalClose={handleActiveModalClose}
-      //onSubmit={handleFormSubmit}
+      onSubmit={handleFormSubmit}
     >
       <label
         className="popup__label"
@@ -109,6 +114,7 @@ const SignupPopup = ({
           type="submit"
           className={`popup__submit-btn ${isValid ? "popup__submit-btn_active" : ""}`}
           disabled={!isValid}
+          onClick={handleFormSubmit}
         >
             Sign up
           {/*{isLoading ? "Loading..." : "Next"}*/}
