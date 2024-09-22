@@ -4,7 +4,7 @@ import PopupWithForm from './PopupWithForm';
 const SuccessPopup = ({ isOpen, handleActiveModalClose, handleOpenLoginPopup }) => {
   return (
     <PopupWithForm
-      title="Success"
+      title="success"
       isOpen={isOpen}
       handleActiveModalClose={handleActiveModalClose}
     >

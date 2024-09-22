@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import Header from './Header';
 import Preloader from './Preloader';
 import NothingFound from './NothingFound';
 import KeywordSearch from "./KeyWordSearch";
 import '../styles/Main.css';
 
-const Main = () => {
+const Main = ({
+  handleOpenLoginPopup,
+  isLoggedIn,
+  user,
+  handleLogin,
+  handleLogout
+}) => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
     
@@ -22,6 +29,14 @@ const Main = () => {
     };
    // Fetch news data based on the keyword and update the state
     return ( 
+      <>
+      <Header 
+          handleOpenLoginPopup={handleOpenLoginPopup} 
+          isLoggedIn={isLoggedIn}
+          user={user}
+          handleLogin={handleLogin} 
+          handleLogout={handleLogout}
+          />
         <div className="main-page__content">
             <h1 className="main-page__header">What's going on in the world?</h1>
                 <p className="main-page__description">Find the latest news on any topic and save them in your personal account.</p>
@@ -37,6 +52,7 @@ const Main = () => {
                 <NothingFound />
             )}
         </div>
+        </>
      );
 }
  

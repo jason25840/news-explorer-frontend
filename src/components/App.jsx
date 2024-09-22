@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import { currentUserContext } from '../contexts/currentUserContext';
 
 import '../styles/App.css';
 import { BrowserRouter as Router, /*Routes, Route*/ } from 'react-router-dom';
-import Header from './Header'; 
+//import Header from './Header'; 
 //import SearchForm from './SearchForm';  
 import Main from './Main';
 import About from './About';
@@ -15,7 +16,8 @@ import SuccessPopup from './SuccessPopup';
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({ name: 'John' });
+  const [currentUser, setCurrentUser] = useState({ name: 'John' });
+  
   //const [isLoading, setIsLoading] = useState(false);
 
   const handleOpenLoginPopup = () => {
@@ -26,9 +28,9 @@ function App() {
     setActiveModal("signup");
   };
 
-  //const handleOpenSuccessPopup = () => {
-  //  setActiveModal("success");
-  //};
+  const handleOpenSuccessPopup = () => {
+    setActiveModal("success");
+  };
   
   const handleActiveModalClose = () => {
     setActiveModal("");
@@ -36,14 +38,28 @@ function App() {
 
   const handleLogin = (email, password) => {
     console.log("Logging in with email:", email);
-    setUser({ name: "John", email }); 
+    setCurrentUser({ name: "John", email }); 
     setIsLoggedIn(true);
     setActiveModal(""); 
   };
 
+  const handleRegistration = (values) => {
+    console.log("Registering with email:", values.email);
+    return new Promise((resolve, reject) => {
+      // Simulate a successful registration after 1 second
+      setTimeout(() => {
+        if (values.email && values.password && values.userName) {
+          resolve();
+        } else {
+          reject(new Error("Invalid registration data"));
+        }
+      }, 1000);
+    });
+  };
+
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUser(null);
+    setCurrentUser(null);
   };
   
 
@@ -65,15 +81,17 @@ function App() {
   return (
     <Router>
     <div className="app_page">
+      <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+        {/* <Header handleOpenLoginPopup={handleOpenLoginPopup} isLoggedIn={isLoggedIn} user={currentUser} handleLogout={handleLogout} /> */}
+        {/* <SearchForm /> */}
       <div className="app_page-content">
-          <Header 
-          handleOpenLoginPopup={handleOpenLoginPopup} 
+          <Main 
+          handleOpenLoginPopup={handleOpenLoginPopup}
           isLoggedIn={isLoggedIn}
-          user={user}
-          handleLogin={handleLogin} 
+          currentUser={currentUser} 
+          handleLogin={handleLogin}
           handleLogout={handleLogout}
           />
-          <Main />
           <PopupWithForm />
       </div>
       <About />
@@ -91,9 +109,9 @@ function App() {
       //title="signup"
       isOpen={activeModal === "signup"}
       handleActiveModalClose={handleActiveModalClose}
-      //handleRegistration={handleRegistration}
+      handleRegistration={handleRegistration}
       handleOpenLoginPopup={handleOpenLoginPopup}
-      //handleOpenSuccessPopup={handleOpenSuccessPopup}
+      handleOpenSuccessPopup={handleOpenSuccessPopup}
       //handleSubmit={handleSubmit}
       //isLoading={isLoading}
       />
@@ -103,6 +121,7 @@ function App() {
         handleOpenLoginPopup={handleOpenLoginPopup}
       />
       <Footer />
+      </currentUserContext.Provider>
     </div>
     </Router>
   );

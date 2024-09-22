@@ -14,6 +14,10 @@
     gap: 42px;
 }
 
+.home_nav {
+    position: relative;
+}
+
 .nav_home {
     color: white;
     margin: 0;
@@ -25,12 +29,24 @@
     text-align: center;
 }
 
-.nav-home_active {
+.nav-home_active-logged-out {
     position: absolute;
     top: 77px;
     right: 248px;
     color: white;
     width: 68px;
+}
+
+.nav-home_active-logged-in {
+    position: absolute;
+    top: 77px;
+    right: 342px;
+    color: white;
+    width: 68px;
+}
+
+.nav-home_inactive {
+    display: hidden;
 }
 
 .nav_signin-button {

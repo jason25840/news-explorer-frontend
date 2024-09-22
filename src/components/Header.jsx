@@ -1,8 +1,9 @@
 import '../styles/Header.css';
-import Navigation from './Navigation';  // Navigation component is not implemented yet. 
+import Navigation from './Navigation'; 
+ // Navigation component is not implemented yet. 
 
 const Header = ({ handleOpenLoginPopup, isLoggedIn, user, handleLogout }) => {
-    return ( 
+    return (  
         <div className="header">
                 <h1 className="header_logo">NewsExplorer</h1>
                 <Navigation 
