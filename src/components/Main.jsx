@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
+//import { hasSearchedContext } from '../contexts/hasSearchedContext';
+
 import Header from './Header';
 import Preloader from './Preloader';
 import NothingFound from './NothingFound';
 import KeywordSearch from "./KeyWordSearch";
+import NewsCardList from './NewsCardList';// Replace with your actual API key
 import '../styles/Main.css';
+import { APIkey } from '../utils/constants';
 
 const Main = ({
   handleOpenLoginPopup,
@@ -13,23 +17,35 @@ const Main = ({
   handleLogout
 }) => {
     const [loading, setLoading] = useState(false);
-    const [data, setData] = useState(null);
-    
+    const [articles, setArticles] = useState([]);
+    const [error, setError] = useState(null);
+    const [hasSearched, setHasSearched] = useState(false);  // Added for search functionality
+
+    //const {hasSearched, setHasSearched} = useContext(hasSearchedContext); 
+
     const handleSearch = (keyword) => {
-      setLoading(true); // Start preloader
-      // Simulate API request with setTimeout (replace with actual fetch call)
-      setTimeout(() => {
-        if (keyword === "found") {
-          setData({ result: "Some result data" });
-        } else {
-          setData(null); // No data found
-        }
-        setLoading(false); // Stop preloader
-      }, 2000); // Simulating delay
-    };
+      setLoading(true); 
+      setError(null); 
+      setHasSearched(true);  // Added for search functionality
+      fetch(`https://newsapi.org/v2/everything?q=${keyword}&apiKey=${APIkey}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.articles.length > 0) {
+            setArticles(data.articles);
+          } else {
+            setArticles([]);
+          }
+          setLoading(false); 
+    })
+    .catch(error => {
+          setError(error);
+          setLoading(false);
+    });
+  };
    // Fetch news data based on the keyword and update the state
     return ( 
       <>
+      <div className="main__page">
       <Header 
           handleOpenLoginPopup={handleOpenLoginPopup} 
           isLoggedIn={isLoggedIn}
@@ -42,16 +58,23 @@ const Main = ({
                 <p className="main-page__description">Find the latest news on any topic and save them in your personal account.</p>
                 {/* Search bar */}
             <KeywordSearch onSearch={handleSearch} />
-
+            </div>
+            </div>
                 {/* Conditionally show Preloader or content */}
                 {loading ? (
             <Preloader />
-            ) : data ? (
-                <div className="results">Here are the results: {data.result}</div>
+        ) : hasSearched && (error || articles.length > 0) ? (
+            error ? (
+              <div className="error-message">{error}</div>
             ) : (
-                <NothingFound />
-            )}
-        </div>
+              <NewsCardList 
+                articles={articles} 
+                isLoggedIn={isLoggedIn}
+                handleSave={() => {}} /> 
+            )
+        ) : hasSearched && articles.length === 0 && !loading ? (
+            <NothingFound />
+        ) : null}
         </>
      );
 }

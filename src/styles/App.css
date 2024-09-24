@@ -1,4 +1,22 @@
-.app_page {
+.page {
+  background-color: #ffffff;
+  margin: 0 auto;
+  max-width: 1440px;
+  height: 100%;
+}
+
+.page__content {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+  .page {
+    min-width: 420px;
+  }
+}
+
+/*}.app_page {
   background-color: white;
   margin: 0 auto;
 }
@@ -7,10 +25,10 @@
   color: white;
   background-image: url('../images/main-image.png');
   max-width: 1440px;
-  height: 576px;
+  height: fit-content;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-}
+}*/
 
 
