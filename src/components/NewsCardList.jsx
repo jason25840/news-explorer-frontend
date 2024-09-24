@@ -1,52 +1,36 @@
-import "./NewsCardList.css";
-import NewsCard from "../NewsCard/NewsCard";
-import { useState, useContext } from "react";
-import { searchResultContext } from "../../contexts/searchResultContext";
-import { hasSearchedContext } from "../../contexts/hasSearchedContext";
+import React, { useState } from 'react';
+import NewsCard from './NewsCard'; 
+// Import your card component
 
-const NewsCardList = ({
-  handleSaveArticle,
-  handleRemoveArticle,
-  onLoginClick,
-}) => {
-  const [cardsDisplayed, setCardsDisplayed] = useState(3);
+const NewsCardList = ({ articles, isLoggedIn, handleSave }) => {
+const [visibleArticles, setVisibleArticles] = useState(3);
 
-  const { searchResult } = useContext(searchResultContext);
+const handleShowMore = () => {
+  setVisibleArticles(prevVisibleArticles => prevVisibleArticles + 3);
+};
 
-  const { hasSearched } = useContext(hasSearchedContext);
-
-  const increaseVisibleCards = () => {
-    setCardsDisplayed(cardsDisplayed + 3);
-  };
-
-  return (
+return (
     <div className="news__card-section">
-      {hasSearched ? (
-        <>
-          <div className="news__cards-header">Search results</div>
-          <div className="news__cards-container">
-            {searchResult.slice(0, cardsDisplayed).map((result, index) => (
-              <li className="news__card-list" key={result.id || index}>
-                <NewsCard
-                  newsData={result}
-                  handleSaveArticle={handleSaveArticle}
-                  handleRemoveArticle={handleRemoveArticle}
-                  onClick={onLoginClick}
-                />
-              </li>
-            ))}
-          </div>
-          <button
-            className={`news__cards-button ${
-              cardsDisplayed >= searchResult.length ? "hidden" : ""
-            }`}
-            onClick={increaseVisibleCards}
-          >
-            Show more
-          </button>
-        </>
-      ) : (
-        ""
+      <h2 className="news__cards-header">Search results</h2>
+      <div className="news__cards-container">
+      {articles.slice(0, visibleArticles).map((article, index) => (
+        <NewsCard
+          key={index} // You can use article.url if it's available and unique
+          source={article.source.name}
+          title={article.title}
+          publishedAt={new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          description={article.description}
+          image={article.urlToImage} // Use the correct prop for the image
+          isLoggedIn={isLoggedIn}
+          handleSave={() => handleSave(article)}
+        />
+      ))}
+      </div>
+      {visibleArticles < articles.length && (
+      <button className="news__cards-button"
+      onClick={handleShowMore}>
+        Show more
+        </button>
       )}
     </div>
   );

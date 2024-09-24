@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { currentUserContext } from '../contexts/currentUserContext';
+import { hasSearchedContext } from '../contexts/hasSearchedContext';
 
 import '../styles/App.css';
 import { BrowserRouter as Router, /*Routes, Route*/ } from 'react-router-dom';
@@ -17,6 +18,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: 'John' });
+  const [hasSearched, setHasSearched] = useState(false);
   
   //const [isLoading, setIsLoading] = useState(false);
 
@@ -82,6 +84,7 @@ function App() {
     <Router>
     <div className="app_page">
       <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+      <hasSearchedContext.Provider value={{ hasSearched, setHasSearched }}>
         {/* <Header handleOpenLoginPopup={handleOpenLoginPopup} isLoggedIn={isLoggedIn} user={currentUser} handleLogout={handleLogout} /> */}
         {/* <SearchForm /> */}
       <div className="app_page-content">
@@ -121,6 +124,7 @@ function App() {
         handleOpenLoginPopup={handleOpenLoginPopup}
       />
       <Footer />
+      </hasSearchedContext.Provider>  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}
       </currentUserContext.Provider>
     </div>
     </Router>
