@@ -6,7 +6,7 @@
 }
 
 .page__content {
-  max-width: 1440px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -15,20 +15,5 @@
     min-width: 420px;
   }
 }
-
-/*}.app_page {
-  background-color: white;
-  margin: 0 auto;
-}
-
-.app_page-content {
-  color: white;
-  background-image: url('../images/main-image.png');
-  max-width: 1440px;
-  height: fit-content;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}*/
 
 

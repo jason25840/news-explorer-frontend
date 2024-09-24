@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "Roboto";
+  src: url('../fonts/roboto-400-regular.woff') format('woff'),
+  url('../fonts/roboto-400-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto Slab";
+  src: url('../fonts/roboto-slab-400-regular.woff') format('woff'),
+  url('../fonts/roboto-slab-400-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url('../fonts/roboto-slab-700.woff') format('woff'),
+  url('../fonts/roboto-slab-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
 .news-card {
   width: 400px;
   height: 576px;
@@ -10,8 +34,9 @@
 }
 
 .news-card__image-container {
+  position: relative;
   width: 100%;
-  height: 272px; /* Image height as per your design */
+  height: 272px;
   overflow: hidden;
 }
 
@@ -19,6 +44,56 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.save-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+}
+
+.save-icon__image {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tooltip styling */
+.news-card__tooltip {
+  display: none;
+  position: absolute;
+  width: 182px;
+  height: 40px;
+  border-radius: 4px;
+  background-color: #fff;
+  top: 24px;
+  right: 69px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  line-height: 40px;
+  color: #333;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.news-card__save-container:hover .news-card__tooltip {
+  display: block;
+  opacity: 1;
+}
+
+/* Save button hover state */
+.save-icon:hover .save-icon__image {
+  content: url('../images/bookmark-hover.svg'); /* Change to hover image */
+}
+
+/* Save button active state */
+.save-icon.active .save-icon__image {
+  content: url('../images/bookmark-filled.svg'); /* Filled bookmark when saved */
 }
 
 .news-card__content {
@@ -39,39 +114,39 @@
 .news-card__source {
   font-size: 14px;
   color: gray;
+  font-family: Roboto Slab;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.4000000059604645px;
+  text-align: left;
 }
 
 .news-card__title {
-  font-size: 20px;
-  margin: 8px 0;
-  font-weight: bold;
+  font-family: Roboto Slab;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: left;
 }
 
 .news-card__date {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 8px;
+  font-family: Source Sans Pro;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  color: #B6BCBF;
+
 }
 
 .news-card__description {
   font-size: 16px;
   color: #333;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
 }
 
-.news-card__save-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.news-card__save-btn.active {
-  color: blue; /* Change the color when the user is logged in */
-}
-
-.save-icon {
-  font-size: 20px;
-}
-
-.news-card__save-btn:hover {
-  color: red; /* Add hover effect */
-}
