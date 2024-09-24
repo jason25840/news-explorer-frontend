@@ -1,26 +1,43 @@
+@font-face {
+  font-family: "Roboto Slab";
+  src: url('../fonts/roboto-slab-400-regular.woff') format('woff'),
+  url('../fonts/roboto-slab-400-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+@font-face {
+  font-family: "Roboto";
+  src: url('../fonts/roboto-500.woff') format('woff'),
+  url('../fonts/roboto-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+
 .news__card-section {
-  display: flex;
   background: #f9f9f9;
-  flex-wrap: wrap;
+  width: 100%;
+  padding: 80px 104px;
 }
 
 .news__cards-header {
-  margin: 60px;
   font-size: 40px;
   line-height: 46px;
   font-family: Roboto-Slab, Arial, sans-serif;
   font-weight: 400;
   font-style: normal;
   color: black;
-  padding-top: 30px;
+  text-align: left;
 }
 
 .news__cards-container {
+  margin: 0;
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   gap: 16px;
   width: 100%;
 }

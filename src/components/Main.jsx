@@ -58,9 +58,8 @@ const Main = ({
                 <p className="main-page__description">Find the latest news on any topic and save them in your personal account.</p>
                 {/* Search bar */}
             <KeywordSearch onSearch={handleSearch} />
-            </div>
-            </div>
-                {/* Conditionally show Preloader or content */}
+        </div>
+        </div>
                 {loading ? (
             <Preloader />
         ) : hasSearched && (error || articles.length > 0) ? (

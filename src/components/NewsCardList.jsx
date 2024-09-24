@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NewsCard from './NewsCard'; 
+import '../styles/NewsCardList.css';  // Assuming you'll style it here
 // Import your card component
 
 const NewsCardList = ({ articles, isLoggedIn, handleSave }) => {
@@ -20,7 +21,7 @@ return (
           title={article.title}
           publishedAt={new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           description={article.description}
-          image={article.urlToImage} // Use the correct prop for the image
+          urlToImage={article.urlToImage} // Use the correct prop for the image
           isLoggedIn={isLoggedIn}
           handleSave={() => handleSave(article)}
         />
