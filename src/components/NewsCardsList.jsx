@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import NewsCard from './NewsCard'; 
-import '../styles/NewsCardList.css';  // Assuming you'll style it here
-// Import your card component
+import { useState, useContext } from 'react';
+import { currentUserContext } from '../contexts/currentUserContext';
 
-const NewsCardList = ({ articles, isLoggedIn, handleSave }) => {
+import NewsCard from './NewsCard'; 
+import '../styles/NewsCardsList.css';  // Assuming you'll style it here
+
+const NewsCardsList = ({ articles, isLoggedIn }) => {
 const [visibleArticles, setVisibleArticles] = useState(3);
+const { currentUser } = useContext(currentUserContext);
+
 
 const handleShowMore = () => {
   setVisibleArticles(prevVisibleArticles => prevVisibleArticles + 3);
@@ -21,10 +24,13 @@ return (
           title={article.title}
           publishedAt={new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
           description={article.description}
+          keyword={article.keyword} 
           urlToImage={article.urlToImage} // Use the correct prop for the image
           isLoggedIn={isLoggedIn}
-          handleSave={() => handleSave(article)}
+          currentUser={currentUser}
+          url={article.url}
         />
+        
       ))}
       </div>
       {visibleArticles < articles.length && (
@@ -37,4 +43,4 @@ return (
   );
 };
 
-export default NewsCardList;
+export default NewsCardsList;

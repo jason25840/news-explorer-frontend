@@ -1,5 +1,6 @@
 import React from "react";
 import notFound from "../images/not-found.svg";
+import "../styles/NothingFound.css";
 
 const NothingFound = () => {
     return ( 
