@@ -112,12 +112,12 @@ function App() {
   }, [activeModal]);
 
   return (
-    <div className="app_page">{/*{`app_page ${currentPage === '/saved-articles' ? 'app__saved-news-page' : ''}`}>*/}
+    <div className={`app_page ${currentPage === '/saved-articles' ? 'app__saved-news-page' : ''}`}>
       <KeywordProvider>
         <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <hasSearchedContext.Provider value={{ hasSearched, setHasSearched }}>
             <currentPageContext.Provider value={{ currentPage, setCurrentPage }}>
-            <div className="app__main-page-content">
+            <div className="app_main-page-content">
               <Header 
                 handleOpenLoginPopup={handleOpenLoginPopup} 
                 isLoggedIn={isLoggedIn} 
@@ -152,7 +152,8 @@ function App() {
             }/>
             </Routes>
             <PopupWithForm />
-            </div>
+          </div>
+
             <LoginPopup  
                 //title="login"
                 isOpen={activeModal === "login"}

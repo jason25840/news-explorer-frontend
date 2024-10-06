@@ -1,20 +1,24 @@
+import { KeywordContext } from '../contexts/keywordContext';
 import '../styles/KeyWordSearch.css';
-import { useState } from "react";
+import { useState, useContext } from "react";
+
 
 const KeywordSearch = ({ onSearch }) => {
-    const [keyword, setKeyword] = useState('');
+    const [inputValue, setInputValue] = useState('');
+    const { setKeyword } = useContext(KeywordContext);  // Added for search functionality
   
     const handleSearch = (e) => {
       e.preventDefault();
-      onSearch(keyword);  
+      setKeyword(inputValue);
+      onSearch(inputValue);  
     };
   
     return (
       <form onSubmit={handleSearch} className="keyword__search-form">
       <input
           type="search"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
           placeholder="Enter topic"
           className="keyword__search-input" 
       />
