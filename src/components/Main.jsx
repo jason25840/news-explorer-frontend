@@ -64,8 +64,8 @@ const Main = ({
             <h1 className="main-page__header">What's going on in the world?</h1>
                 <p className="main-page__description">Find the latest news on any topic and save them in your personal account.</p>
                 {/* Search bar */}
-            <KeywordSearch onSearch={handleSearch} />
         </div>
+            <KeywordSearch onSearch={handleSearch} />
       </div>
                 {loading ? (
             <Preloader />

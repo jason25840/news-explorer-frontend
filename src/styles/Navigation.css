@@ -1,4 +1,5 @@
-.nav_container {
+/* Navigation Styles */
+.navigation__container {
     position: relative;
     display: flex;
     margin: 0;
@@ -6,7 +7,7 @@
     gap: 42px;
 }
 
-.nav-home__container {
+.navigation__home-container {
     position: relative; 
     display: flex;
     flex-direction: column;
@@ -14,7 +15,7 @@
     justify-content: center;
 }
 
-.nav_home {
+.navigation__home-link {
     width: 64px;
     color: white;
     text-decoration: none;
@@ -25,7 +26,7 @@
     text-align: center;
 }
 
-.nav-home__container.active .nav_home:after {
+.navigation__home-container.active .navigation__home-link:after {
     content: "";
     position: absolute;
     bottom: -27px;
@@ -35,26 +36,14 @@
     background: white;
 }
 
-.navigation_text-color_saved-news .nav_home {
-    color: black;
-}
-
-.navigation_saved-news .nav_home {
-    color: black;
-  }
-
-.navigation_text-color_saved-news .nav_saved-articles {
-    color: black;
-  }
-
-.nav-saved-articles__container {
+.navigation__saved-articles-container {
     position: relative; 
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.nav_saved-articles {
+.navigation__saved-articles-link {
     width: 160px;
     font-family: Roboto;
     font-size: 18px;
@@ -65,7 +54,7 @@
     color: #B6BCBF;
 }
 
-.nav-saved-articles__container.active .nav_saved-articles:after {
+.navigation__saved-articles-container.active .navigation__saved-articles-link:after {
     content: "";
     width: 100%; 
     position: absolute;
@@ -75,11 +64,7 @@
     background: black;
 }
 
-.nav-saved-articles__container .navigation_text-color_saved-news {
-    color: black; 
-  }
-
-.nav_signin-button {
+.navigation__signin-button {
     width: 176px;
     height: 48px;
     border: 1px solid white; 
@@ -93,19 +78,28 @@
     font-size: 18px;
     font-weight: 500;
     line-height: 24px;
-    text-align: center;
 }
 
-.navigation_text-color_saved-news .nav_signin-button {
+.navigation__text--saved-news .navigation__signin-button {
     border: 1px solid black;
-    color: black;
 }
       
-.nav_signin-button:hover {
+.navigation__signin-button:hover {
     opacity: 0.8;
-  }  
+}
 
-.nav_user-info {
+.navigation__text--saved-news.navigation__home-link,
+.navigation__text--saved-news.navigation__saved-articles-link,
+.navigation__text--saved-news.navigation__signin-button,
+.navigation__text--saved-news.navigation__username {
+    color: black !important;
+}
+
+.navigation__text--saved-news.navigation__user-info {
+    border-color: black !important;
+}
+
+.navigation__user-info {
     color: white;
     display: flex;
     justify-content: center;
@@ -117,49 +111,71 @@
     gap: 5px;
 }
 
-.nav_user-info.navigation_text-color_saved-news {
+.navigation__user-info--saved-news {
     color: black;
     border: 1px solid black;
 }
 
-@media screen and (max-width:768px) {
-    .nav_container {
+@media screen and (max-width: 768px) {
+    .navigation__container {
         gap: 16px;
     }
 
-    .nav_home {
+    .navigation__home-link {
         font-size: 16px;
         line-height: 24px;
     }
 
-    .nav-home__container.active .nav_home:after {
+    .navigation__home-container.active .navigation__home-link:after {
         bottom: -21px;
     }
 
-    .nav_signin-button {
+    .navigation__signin-button {
         width: 152px;
         height: 40px;
         font-size: 16px;
         line-height: 24px;
     }
 
-    .nav_saved-articles {
+    .navigation__saved-articles-link {
         font-size: 16px;
         line-height: 22px;
     }
 
-    .nav-saved-articles__container.active .nav_saved-articles:after {
+    .navigation__saved-articles-container.active .navigation__saved-articles-link:after {
         bottom: -21px;
     }
 
-    .nav_user-info {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 35px;
+    .navigation__user-info {
         width: 100px;
         height: 40px;
     }
 }
 
+.navigation__hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.navigation__hamburger-line--white {
+    width: 16px;
+    height: 2px;
+    background-color: white;
+    margin: 4px 0;
+}
+
+.navigation__hamburger-line--black {
+    width: 16px;
+    height: 2px;
+    background-color: black;
+    margin: 4px 0;
+}
+
+@media (max-width: 425px) {
+    .navigation__hamburger-menu {
+        display: block;
+    }
+}
 

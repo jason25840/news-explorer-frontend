@@ -1,188 +1,82 @@
-import { Routes, Route, useLocation } from 'react-router-dom';
+import '../styles/Navigation.css';
 
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { currentUserContext } from '../contexts/currentUserContext';
-import { hasSearchedContext } from '../contexts/hasSearchedContext';
-import { currentPageContext } from '../contexts/currentPageContext';
-import { KeywordProvider } from '../contexts/keywordContext';
+//import { currentPageContext } from '../contexts/currentPageContext';
+import { useLocation, Link } from 'react-router-dom';
+import logoutIcon from '../images/logout.svg'; 
+import blackLogoutIcon from '../images/black-logout.svg'; 
 
-//import { useLocation } from'react-router-dom';
+const Navigation = ({
+    handleOpenLoginPopup,
+    isLoggedIn, 
+    handleLogout
+}) => {
+    const { currentUser } = useContext(currentUserContext);
+    
+    const location = useLocation();
+    const currentPage = location.pathname;  
 
-import '../styles/App.css';  
-import Header from './Header';
-import Main from './Main';
-import SavedNews from './SavedNews';
-import About from './About';
-import Footer from './Footer';
-import { loginUser, registerUser } from '../mockData/SavedArticles';
-import PopupWithForm from './PopupWithForm'; 
-import LoginPopup from './LoginPopup';
-import SignupPopup from './SignupPopup';
-import SuccessPopup from './SuccessPopup';
+    const navClass = location.pathname === '/saved-articles' ? 'navigation navigation_saved-news' : 'navigation';
+    const textColorClass = location.pathname === '/saved-articles' ? 'navigation_text-color_saved-news' : 'navigation_text-color';
 
-function App() {
-  const [activeModal, setActiveModal] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: 'John' });
-  const [hasSearched, setHasSearched] = useState(false);
-  const [currentPage, setCurrentPage] = useState("");
-  const [currentKeyword, setCurrentKeyword] = useState('');
+    return (
+        <div className={`nav_container ${navClass}`}>
+            <div className={`nav-home__container ${currentPage === '/' ? 'active' : ''}`}>
+            <Link to="/" className={`nav_home ${textColorClass}`}>Home</Link>
+            </div>
+            {isLoggedIn && (
+                    <div className={`nav-saved-articles__container ${currentPage === '/saved-articles' ? 'active' : ''}`}>
+                      <Link to="/saved-articles" className={`nav_saved-articles ${textColorClass}`}>Saved articles</Link>
+                    </div>
+                  )}
+                    {isLoggedIn ? (
+                    <div className={`nav_user-info ${textColorClass}`}>
+                        <span className="nav_username">{currentUser?.userName || "guest"}</span>
+                        <img src={currentPage === '/saved-articles' ? blackLogoutIcon : logoutIcon} 
+                        alt="logout" 
+                        className="nav_logout-icon" 
+                        onClick={handleLogout} 
+                        />
+                    </div>
+            ) : (
+            <button 
+            className={`nav_signin-button ${textColorClass}`}
+            type='button'
+            onClick={handleOpenLoginPopup} 
+            >
+            Sign in
+            </button>
+            )}
+        </div>
+      );
+}
+ 
+export default Navigation;
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('currentUser'));
-    if (storedUser) {
-      setCurrentUser(storedUser);
-    }
-  }, []); 
+import Navigation from './Navigation'; 
+import { useLocation } from 'react-router-dom';
+import { currentUserContext } from '../contexts/currentUserContext';
+ // Navigation component is not implemented yet. 
 
-  const handleKeywordSearch = (keyword) => {
-    setCurrentKeyword(keyword); 
-  };
-  
-  const location = useLocation();
+const Header = ({ handleOpenLoginPopup, isLoggedIn, handleLogout }) => {
+    const currentUser = useContext(currentUserContext);
+    const location = useLocation();  
 
-  useEffect(() => {
-    setCurrentPage(location.pathname);
-  }, [location.pathname]);
-  
+    const headerClass = location.pathname === '/saved-articles' ? 'header header_saved-news header_box-shadow': 'header';
+    const logoClass = location.pathname === '/saved-articles' ? 'header_logo header_logo_saved-news' : 'header_logo';
 
-  const handleOpenLoginPopup = () => {
-    setActiveModal("login");
-  };
-
-  const handleOpenSignupPopup = () => {
-    setActiveModal("signup");
-  };
-
-  const handleOpenSuccessPopup = () => {
-    setActiveModal("success");
-  };
-  
-  const handleActiveModalClose = () => {
-    setActiveModal("");
-  };
-
-  const handleRegistration = (values) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (values.email && values.password && values.userName) {
-          const newUser = registerUser({ email: values.email, password: values.password, userName: values.userName });
-          setCurrentUser(newUser);  // Set the newly registered user as the current user
-          setIsLoggedIn(true);
-          resolve();
-        } else {
-          reject(new Error("Invalid registration data"));
-        }
-      }, 1000);
-    });
-  };
-
-  const handleLogin = (email, password) => {
-    const user = loginUser(email, password);  
-    if (user) {
-      setCurrentUser(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));  
-      setIsLoggedIn(true);
-      setActiveModal("");  
-    } else {
-      console.error("Login failed: Incorrect email or password");
-    }
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('currentUser');  
-    setCurrentUser(null); 
-  };
-  
-
-  useEffect(() => {
-    function handleKeyDown(e) {
-      if (e.key === "Escape") {
-        setActiveModal("");
-      }
-    }
-  
-    if (!activeModal) {
-      return;
-    }
-  
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [activeModal]);
-
-  return (
-    <div className={`app_page ${currentPage === '/saved-articles' ? 'app__saved-news-page' : ''}`}>
-      <KeywordProvider>
-        <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
-          <hasSearchedContext.Provider value={{ hasSearched, setHasSearched }}>
-            <currentPageContext.Provider value={{ currentPage, setCurrentPage }}>
-            <div className="app_main-page-content">
-              <Header 
-                handleOpenLoginPopup={handleOpenLoginPopup} 
-                isLoggedIn={isLoggedIn} 
-                currentUser={currentUser} 
-                handleLogout={handleLogout} /> 
-            <Routes>
-              <Route 
-                path="/" 
-                element={
-            <>
-              <Main 
+    return (  
+        <div className={headerClass}>
+                <h1 className={logoClass}>NewsExplorer</h1>
+                <Navigation 
                 handleOpenLoginPopup={handleOpenLoginPopup}
                 isLoggedIn={isLoggedIn}
-                currentUser={currentUser} 
-                handleLogin={handleLogin}
+                currentUser={currentUser}
                 handleLogout={handleLogout}
-                onSearch={handleKeywordSearch}
-              />
-              <About />
-            </>
-            }
-            />
-              <Route 
-                path="/saved-articles" 
-                element={
-              <SavedNews 
-                isLoggedIn={isLoggedIn}
-                currentUser={currentUser} 
-                handleLogout={handleLogout}
-                keyword={currentKeyword} 
-              />
-            }/>
-            </Routes>
-            <PopupWithForm />
-          </div>
-
-            <LoginPopup  
-                //title="login"
-                isOpen={activeModal === "login"}
-                handleActiveModalClose={handleActiveModalClose}
-                handleLogin={handleLogin}
-                handleOpenSignupPopup={handleOpenSignupPopup}
-                //isLoading={isLoading}
-            />
-            <SignupPopup
-            //title="signup"
-              isOpen={activeModal === "signup"}
-              handleActiveModalClose={handleActiveModalClose}
-              handleRegistration={handleRegistration}
-              handleOpenLoginPopup={handleOpenLoginPopup}
-              handleOpenSuccessPopup={handleOpenSuccessPopup}
-            //isLoading={isLoading}
-            />
-            <SuccessPopup
-              isOpen={activeModal === "success"}
-              handleActiveModalClose={handleActiveModalClose}
-              handleOpenLoginPopup={handleOpenLoginPopup}
-            />
-            <Footer />
-          </currentPageContext.Provider>
-        </hasSearchedContext.Provider>  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}
-      </currentUserContext.Provider>
-    </KeywordProvider>
-    </div>
-  );
+                />
+        </div>
+     );
 }
-
-export default App;
+ 
+export default Header;

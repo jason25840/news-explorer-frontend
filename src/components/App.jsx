@@ -28,6 +28,8 @@ function App() {
   const [currentPage, setCurrentPage] = useState("");
   const [currentKeyword, setCurrentKeyword] = useState('');
 
+  const location = useLocation();
+
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
     if (storedUser) {
@@ -38,8 +40,6 @@ function App() {
   const handleKeywordSearch = (keyword) => {
     setCurrentKeyword(keyword); 
   };
-  
-  const location = useLocation();
 
   useEffect(() => {
     setCurrentPage(location.pathname);
@@ -112,47 +112,57 @@ function App() {
   }, [activeModal]);
 
   return (
-    <div className="app_page">{/*{`app_page ${currentPage === '/saved-articles' ? 'app__saved-news-page' : ''}`}>*/}
+    <div className="app_page">
       <KeywordProvider>
         <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <hasSearchedContext.Provider value={{ hasSearched, setHasSearched }}>
             <currentPageContext.Provider value={{ currentPage, setCurrentPage }}>
-            <div className="app__main-page-content">
-              <Header 
-                handleOpenLoginPopup={handleOpenLoginPopup} 
-                isLoggedIn={isLoggedIn} 
-                currentUser={currentUser} 
-                handleLogout={handleLogout} /> 
             <Routes>
               <Route 
                 path="/" 
                 element={
-            <>
-              <Main 
-                handleOpenLoginPopup={handleOpenLoginPopup}
-                isLoggedIn={isLoggedIn}
-                currentUser={currentUser} 
-                handleLogin={handleLogin}
-                handleLogout={handleLogout}
-                onSearch={handleKeywordSearch}
-              />
+                 <>
+                <div className={`app__main-page-content ${currentPage === '/' ? 'header-main-wrapper' : ''}`}>
+                      <Header 
+                        handleOpenLoginPopup={handleOpenLoginPopup} 
+                        isLoggedIn={isLoggedIn} 
+                        currentUser={currentUser} 
+                        handleLogout={handleLogout} 
+                        /> 
+                      <Main 
+                        handleOpenLoginPopup={handleOpenLoginPopup}
+                        isLoggedIn={isLoggedIn}
+                        currentUser={currentUser} 
+                        handleLogin={handleLogin}
+                        handleLogout={handleLogout}
+                        onSearch={handleKeywordSearch}
+                      />
+                </div>
               <About />
-            </>
+                </> 
+               } 
+               />
+                  <Route 
+                    path="/saved-articles" 
+                    element={
+                      <>
+                      <Header 
+                      handleOpenLoginPopup={handleOpenLoginPopup} 
+                      isLoggedIn={isLoggedIn} 
+                      currentUser={currentUser} 
+                      handleLogout={handleLogout} 
+                      />
+                  <SavedNews 
+                    isLoggedIn={isLoggedIn}
+                    currentUser={currentUser} 
+                    handleLogout={handleLogout}
+                    keyword={currentKeyword} 
+                  />
+              </>
             }
             />
-              <Route 
-                path="/saved-articles" 
-                element={
-              <SavedNews 
-                isLoggedIn={isLoggedIn}
-                currentUser={currentUser} 
-                handleLogout={handleLogout}
-                keyword={currentKeyword} 
-              />
-            }/>
             </Routes>
             <PopupWithForm />
-            </div>
             <LoginPopup  
                 //title="login"
                 isOpen={activeModal === "login"}

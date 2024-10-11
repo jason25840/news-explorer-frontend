@@ -1,6 +1,21 @@
+.header-main-wrapper {
+    background-color: transparent; 
+    background-image: url('../images/main-image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background 0.3s ease;
+  }
+  
+  .header-main-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
 .header {
     margin: 0;
     max-width: 1440px;
+    width: auto;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -30,14 +45,14 @@
     color: black;
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width:770px) {
     .header {
         height: 66px;
         padding: 0 40px;
     }
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:425px) {
     .header {
         height: 56px;
         padding: 0 16px;
