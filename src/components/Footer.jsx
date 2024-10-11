@@ -5,11 +5,11 @@ import { Link } from'react-router-dom';
 
 const Footer = () => {
     return ( 
-        <div className="footer_content">
+        <footer className="footer_content">
             <p className="copyright">© 2024 Supersite, Powered by News API</p>
             <div className="footer_links">
-                <Link to="/" className='home_link'>Home</Link>
-                <a href="https://tripleten.com/" className="triple_link">TripleTen</a>
+                <Link to="/" className='footer_link home_link'>Home</Link>
+                <a href="https://tripleten.com/" className="footer_link triple_link">TripleTen</a>
                 <div className="social_links">
                     <a href="https://github.com/jason25840/news-explorer-frontend.git" className="gitHub_link">
                         <img src={GitHub} alt="GitHub" className="social-icon" />
@@ -19,7 +19,7 @@ const Footer = () => {
                     </a>
                 </div>
             </div>
-        </div>
+        </footer>
       );
 }
  
