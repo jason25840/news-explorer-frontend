@@ -1,5 +1,51 @@
 import { useState, useContext } from 'react';
 import { currentUserContext } from '../contexts/currentUserContext';
+import NewsCard from './NewsCard'; 
+import '../styles/NewsCardsList.css';
+
+const NewsCardsList = ({ articles, isLoggedIn }) => {
+  const [visibleArticles, setVisibleArticles] = useState(3);
+  const { currentUser } = useContext(currentUserContext);
+
+  const handleShowMore = () => {
+    setVisibleArticles((prevVisibleArticles) => prevVisibleArticles + 3);
+  };
+
+  return (
+    <section className="news-cards">
+      <h2 className="news-cards__header">Search results</h2>
+      <div className="news-cards__container">
+        {articles.slice(0, visibleArticles).map((article, index) => (
+          <NewsCard
+            key={index} 
+            source={article.source.name}
+            title={article.title}
+            publishedAt={new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            description={article.description}
+            keyword={article.keyword}
+            urlToImage={article.urlToImage}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+            url={article.url}
+          />
+        ))}
+      </div>
+      {visibleArticles < articles.length && (
+        <button 
+          className="news-cards__button" 
+          onClick={handleShowMore}
+        >
+          Show more
+        </button>
+      )}
+    </section>
+  );
+};
+
+export default NewsCardsList;
+
+/*import { useState, useContext } from 'react';
+import { currentUserContext } from '../contexts/currentUserContext';
 
 import NewsCard from './NewsCard'; 
 import '../styles/NewsCardsList.css';  // Assuming you'll style it here
@@ -43,4 +89,4 @@ return (
   );
 };
 
-export default NewsCardsList;
+export default NewsCardsList;*/

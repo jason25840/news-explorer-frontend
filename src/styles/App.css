@@ -1,11 +1,11 @@
-.app_page {
+.app__main-page {
   background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 } 
 
-.app__main-page-content {
+.app__content {
   flex: 1 0 auto;
   background-color: white; 
   display: flex;

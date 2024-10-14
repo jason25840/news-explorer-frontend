@@ -1,4 +1,99 @@
-.footer_content {
+.footer {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  max-width: 1440px;
+  height: 80px;
+  padding: 0 40px;
+}
+
+.footer__copyright {
+  color: #b6bcbf;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  text-align: left;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.footer__link {
+  font-family: Roboto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  color: #1a1b22;
+  text-decoration: none;
+}
+
+.footer__social-links {
+  display: flex;
+  gap: 24px;
+}
+
+.footer__social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+@media screen and (max-width: 425px) {
+  .footer {
+    height: 176px;
+    padding: 0;
+    margin: 20px 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+  }
+
+  .footer__links {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "home social"
+      "tripleten .";
+  }
+
+  .footer__link {
+    grid-column: 1;
+    display: block;
+    text-align: left;
+  }
+
+  .footer__link--home {
+    grid-area: home;
+  }
+
+  .footer__link--tripleten {
+    grid-area: tripleten;
+  }
+
+  .footer__social-links {
+    grid-column: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    grid-area: social;
+  }
+
+  .footer__copyright {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    text-align: center;
+  }
+}
+
+/*.footer_content {
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -101,4 +196,4 @@
     grid-row: 3;
     text-align: center;
   }
-}
+}*/
