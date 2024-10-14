@@ -29,7 +29,6 @@ const SignupPopup = ({
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (isValid) {
-  //    const makeRequest = () => handleRegistration(values);
     handleRegistration(values)
       .then(() => {
       handleOpenSuccessPopup();
