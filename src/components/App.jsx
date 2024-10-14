@@ -6,7 +6,6 @@ import { hasSearchedContext } from '../contexts/hasSearchedContext';
 import { currentPageContext } from '../contexts/currentPageContext';
 import { KeywordProvider } from '../contexts/keywordContext';
 
-//import { useLocation } from'react-router-dom';
 
 import '../styles/App.css';  
 import Header from './Header';
@@ -112,7 +111,7 @@ function App() {
   }, [activeModal]);
 
   return (
-    <div className="app_page">
+    <div className="app__main-page">
       <KeywordProvider>
         <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <hasSearchedContext.Provider value={{ hasSearched, setHasSearched }}>
@@ -122,7 +121,7 @@ function App() {
                 path="/" 
                 element={
                  <>
-                <div className={`app__main-page-content ${currentPage === '/' ? 'header-main-wrapper' : ''}`}>
+                <div className={`app__content ${currentPage === '/' ? 'header-main-wrapper' : ''}`}>
                       <Header 
                         handleOpenLoginPopup={handleOpenLoginPopup} 
                         isLoggedIn={isLoggedIn} 
@@ -187,7 +186,7 @@ function App() {
             />
             <Footer />
           </currentPageContext.Provider>
-        </hasSearchedContext.Provider>  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}  {/* Added for search functionality */}
+        </hasSearchedContext.Provider>  
       </currentUserContext.Provider>
     </KeywordProvider>
     </div>

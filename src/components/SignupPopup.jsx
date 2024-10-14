@@ -117,7 +117,6 @@ const SignupPopup = ({
           onClick={handleFormSubmit}
         >
             Sign up
-          {/*{isLoading ? "Loading..." : "Next"}*/}
         </button>
         <button
           className="popup__option-btn"

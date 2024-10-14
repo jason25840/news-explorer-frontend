@@ -19,9 +19,7 @@ const LoginPopup = ({
     isTyping,
     resetForm, 
   } = useFormAndValidation();
-    
 
-    //add resetForm to above const.
 
   useEffect(() => {
     if (isOpen) {
@@ -33,11 +31,7 @@ const LoginPopup = ({
     e.preventDefault();
     handleLogin(values.email, values.password);
   }
-  //  if (isValid) {
-   //   const makeRequest = () => handleLogin(values);
-   //   handleSubmit(makeRequest);
-   // }
-  //};
+  
   return (
     <PopupWithForm
       buttonText="Sign in"

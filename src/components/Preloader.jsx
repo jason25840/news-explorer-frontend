@@ -1,4 +1,14 @@
-import React from 'react'
+import React from 'react';
+
+export default function Preloader() {
+  return (
+    <div className="preloader">
+      <div className="preloader__circle"></div>
+    </div>
+  );
+}
+
+/*import React from 'react'
 
 export default function Preloader() {
   return (
@@ -6,4 +16,4 @@ export default function Preloader() {
       
     </div>
   )
-}
+}*/

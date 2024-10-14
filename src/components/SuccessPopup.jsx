@@ -1,15 +1,16 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm';
+import '../styles/SuccessPopup.css';
 
 const SuccessPopup = ({ isOpen, handleActiveModalClose, handleOpenLoginPopup }) => {
   return (
     <PopupWithForm
-      title="success"
+      title={null}
       isOpen={isOpen}
       handleActiveModalClose={handleActiveModalClose}
     >
-      <div className="success-message">
-        <p>Registration successfully completed!</p>
+      <div className="success-popup__message">
+      <p className="success-popup__text">Registration successfully completed!</p>
         <button
           className="popup__option-btn"
           type="button"
