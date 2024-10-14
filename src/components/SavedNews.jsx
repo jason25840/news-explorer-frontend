@@ -1,5 +1,5 @@
 import SavedNewsCardsList from './SavedNewsCardsList';
-import SavedNewsHeader from './SavedNewsHeader';  // Added for search functionality
+import SavedNewsHeader from './SavedNewsHeader';  
 
 const SavedNews = ({
     isLoggedIn,
@@ -17,7 +17,7 @@ const SavedNews = ({
         <SavedNewsCardsList 
         isLoggedIn={isLoggedIn}
         currentUser={currentUser}
-        keyword={keyword}  // Added for search functionality
+        keyword={keyword} 
         />
         </>
      );
