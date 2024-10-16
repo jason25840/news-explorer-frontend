@@ -172,8 +172,12 @@
     flex: 0 0 150px;
   }
 
+  .news-card__content {
+    padding: 20px 16px 24px 16px;
+  }
+
   .news-card__title {
-    max-width: 192px;
+    width: 100%;
     max-height: 72px;
     overflow: hidden;
     font-size: 22px;
@@ -181,7 +185,7 @@
   }
 
   .news-card__description {
-    max-width: 192px;
+    width: 100%;
     max-height: 88px;
     display: -webkit-box;
     -webkit-line-clamp: 4;
@@ -201,6 +205,11 @@
   .news-card__date {
     font-size: 18px;
     line-height: 24px;
+  }
+
+  .news-card__tooltip {
+    top: 8px;
+    left: 8px;
   }
 }
 

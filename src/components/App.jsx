@@ -66,7 +66,7 @@ function App() {
       setTimeout(() => {
         if (values.email && values.password && values.userName) {
           const newUser = registerUser({ email: values.email, password: values.password, userName: values.userName });
-          setCurrentUser(newUser);  // Set the newly registered user as the current user
+          setCurrentUser(newUser);  
           setIsLoggedIn(true);
           resolve();
         } else {
@@ -111,7 +111,7 @@ function App() {
   }, [activeModal]);
 
   return (
-    <div className="app__main-page">
+    <div className="app">
       <KeywordProvider>
         <currentUserContext.Provider value={{ currentUser, setCurrentUser }}>
           <hasSearchedContext.Provider value={{ hasSearched, setHasSearched }}>
