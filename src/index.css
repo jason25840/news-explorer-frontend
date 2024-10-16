@@ -17,11 +17,6 @@ body {
     margin: 0;
     padding: 0;
   }
-
-  /* App.css or index.css */
-* {
-  outline: 1px solid red !important;
-}
-
+  
   @import url('./Vendor/fonts/fonts.css');
   @import url('./Vendor/normalize.css');
