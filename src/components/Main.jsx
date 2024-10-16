@@ -55,7 +55,7 @@ const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
 
   return (
     <>
-      <div className="main">
+      <main className="main">
         <div className="main__content">
           <h1 className="main__header">What's going on in the world?</h1>
           <p className="main__description">
@@ -63,7 +63,7 @@ const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
           </p>
         </div>
         <KeyWordSearch onSearch={handleSearch} />
-      </div>
+      </main>
       {loading ? (
         <Preloader />
       ) : hasSearched && (error || articles.length > 0) ? (

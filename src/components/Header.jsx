@@ -22,7 +22,7 @@ const Header = ({ handleOpenLoginPopup, isLoggedIn, handleLogout }) => {
     };
 
     return (  
-        <div className={headerClass}>
+        <header className={headerClass}>
             <h1 className={logoClass}>NewsExplorer</h1>
             {isMenuOpen ? (
                 <MobileMenuOverlay
@@ -39,7 +39,7 @@ const Header = ({ handleOpenLoginPopup, isLoggedIn, handleLogout }) => {
                     toggleMenu={toggleMenu}
                 />
             )}
-        </div>
+        </header>
      );
 }
  
