@@ -3,7 +3,7 @@ import { currentUserContext } from '../contexts/currentUserContext';
 import NewsCard from './NewsCard'; 
 import '../styles/NewsCardsList.css';
 
-const NewsCardsList = ({ articles, isLoggedIn }) => {
+const NewsCardsList = ({ articles, isLoggedIn, handleArticleDelete }) => {
   const [visibleArticles, setVisibleArticles] = useState(3);
   const { currentUser } = useContext(currentUserContext);
 
@@ -15,18 +15,20 @@ const NewsCardsList = ({ articles, isLoggedIn }) => {
     <section className="news-cards">
       <h2 className="news-cards__header">Search results</h2>
       <div className="news-cards__container">
-        {articles.slice(0, visibleArticles).map((article, index) => (
+        {articles.slice(0, visibleArticles).map((article) => (
           <NewsCard
-            key={index} 
+            key={article.url}
+            id={article.url}
             source={article.source.name}
             title={article.title}
-            publishedAt={new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-            description={article.description}
+            publishedAt={article.publishedAt}
+            description={article.description || article.content}
             keyword={article.keyword}
             urlToImage={article.urlToImage}
+            url={article.url}
             isLoggedIn={isLoggedIn}
             currentUser={currentUser}
-            url={article.url}
+            onArticleDelete={() => handleArticleDelete(article.url)}
           />
         ))}
       </div>

@@ -7,8 +7,6 @@ import NothingFound from './NothingFound';
 import KeyWordSearch from './KeyWordSearch';
 import NewsCardsList from './NewsCardsList';
 import { APIkey } from '../utils/constants';
-import { saveUserArticle } from '../mockData/SavedArticles';
-import { currentUserContext } from '../contexts/currentUserContext';
 
 const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
   const [loading, setLoading] = useState(false);
@@ -16,7 +14,6 @@ const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const { setKeyword } = useContext(KeywordContext);
-  const { currentUser } = useContext(currentUserContext);
 
   const handleSearch = (searchKeyword) => {
     setLoading(true);
@@ -44,15 +41,6 @@ const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
       });
   };
 
-  const handleSave = (article) => {
-    if (isLoggedIn && currentUser) {
-      const savedArticles = saveUserArticle(currentUser.email, article);
-      console.log('Saved articles for user:', savedArticles);
-    } else {
-      handleOpenLoginPopup();
-    }
-  };
-
   return (
     <>
       <main className="main">
@@ -70,7 +58,11 @@ const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
         error ? (
           <div className="main__error-message">{error.message}</div>
         ) : (
-          <NewsCardsList articles={articles} isLoggedIn={isLoggedIn} handleSave={handleSave} />
+          <NewsCardsList 
+          articles={articles} 
+          isLoggedIn={isLoggedIn} 
+          handleArticleDelete 
+          />
         )
       ) : hasSearched && articles.length === 0 && !loading ? (
         <NothingFound />

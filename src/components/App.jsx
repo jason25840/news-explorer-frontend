@@ -13,11 +13,11 @@ import Main from './Main';
 import SavedNews from './SavedNews';
 import About from './About';
 import Footer from './Footer';
-import { loginUser, registerUser } from '../mockData/SavedArticles';
 import PopupWithForm from './PopupWithForm'; 
 import LoginPopup from './LoginPopup';
 import SignupPopup from './SignupPopup';
 import SuccessPopup from './SuccessPopup';
+import * as api from '../utils/api';
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -28,6 +28,18 @@ function App() {
   const [currentKeyword, setCurrentKeyword] = useState('');
 
   const location = useLocation();
+
+  useEffect(() => {
+    const token = api.getToken();
+    if (token) {
+      api.getUser()
+        .then((user) => {
+          setCurrentUser(user);
+          setIsLoggedIn(true);
+        })
+        .catch(() => api.logout()); // Handle invalid token
+    }
+  }, []);
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -61,31 +73,37 @@ function App() {
     setActiveModal("");
   };
 
-  const handleRegistration = (values) => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (values.email && values.password && values.userName) {
-          const newUser = registerUser({ email: values.email, password: values.password, userName: values.userName });
-          setCurrentUser(newUser);  
-          setIsLoggedIn(true);
-          resolve();
-        } else {
-          reject(new Error("Invalid registration data"));
-        }
-      }, 1000);
-    });
+  const handleRegistration = (email, password, name) => {
+    return api.register(email, password, name) 
+      .then((data) => {
+        handleOpenSuccessPopup(); 
+      })
+      .catch((error) => {
+        console.error('Signup failed:', error);
+        alert('Registration failed. Please try again.');
+        throw error; 
+      });
   };
-
   const handleLogin = (email, password) => {
-    const user = loginUser(email, password);  
-    if (user) {
-      setCurrentUser(user);
-      localStorage.setItem('currentUser', JSON.stringify(user));  
-      setIsLoggedIn(true);
-      setActiveModal("");  
-    } else {
-      console.error("Login failed: Incorrect email or password");
-    }
+    return api.login(email, password) 
+      .then((data) => {
+      if (data.token) {
+        api.setToken(data.token); 
+        return api.getUser();
+       } else {
+        throw new Error('Token not provided');
+       } 
+      })
+      .then((user) => {
+        setCurrentUser(user); 
+        setIsLoggedIn(true); 
+        handleActiveModalClose();
+      })
+      .catch((error) => {
+        console.error('Login failed:', error);
+        alert('Invalid email or password'); 
+        throw error; 
+      });
   };
 
   const handleLogout = () => {

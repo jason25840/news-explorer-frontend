@@ -68,7 +68,7 @@ const Navigation = ({ handleOpenLoginPopup, isLoggedIn, handleLogout }) => {
                             )}
                             {isLoggedIn ? (
                                 <div className="navigation__user">
-                                    <span className={`navigation__username ${currentPage === '/' ? 'navigation__username-white' : ''}`}>{currentUser?.userName || 'guest'}</span>
+                                    <span className={`navigation__username ${currentPage === '/' ? 'navigation__username-white' : ''}`}>{currentUser?.name || 'guest'}</span>
                                     <img
                                         src={isSavedNewsPage ? blackLogoutIcon : logoutIcon}
                                         alt="logout"
