@@ -1,26 +1,24 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { currentUserContext } from '../contexts/currentUserContext';  
+import React from 'react';  
 import NewsCard from './NewsCard'; 
 import '../styles/NewsCardsList.css'; 
 import '../styles/SavedNewsCardsList.css';
-import { fetchSavedArticlesForUser, deleteUserArticle } from '../mockData/SavedArticles';
+import { deleteArticle } from '../utils/api';
 
-const SavedNewsCardsList = ({ isLoggedIn }) => {
-  const [savedArticles, setSavedArticles] = useState([]);
-  const { currentUser } = useContext(currentUserContext);
+const SavedNewsCardsList = ({ 
+  isLoggedIn,
+  currentUser,
+  keyword,
+  savedArticles,
+  setSavedArticles,}) => {
 
-  useEffect(() => {
-    if (currentUser) {
-      const articles = fetchSavedArticlesForUser(currentUser.email);
-      setSavedArticles(articles);
-    }
-  }, [currentUser]);
-
-  const handleArticleDelete = (url) => {
-    if (currentUser) {
-      const updatedArticles = deleteUserArticle(currentUser.email, url);
-      setSavedArticles(updatedArticles);
-    }
+  const handleArticleDelete = (id) => {
+    deleteArticle(id)
+      .then(() => {
+        setSavedArticles((prevArticles) =>
+          prevArticles.filter((article) => article._id !== id)
+        );
+      })
+      .catch((err) => console.error('Failed to delete article:', err));
   };
 
   return (
@@ -29,7 +27,7 @@ const SavedNewsCardsList = ({ isLoggedIn }) => {
         {savedArticles.length > 0 ? (
           savedArticles.map((article, index) => (
             <NewsCard
-              key={index}
+              key={article._id}
               source={article.source}
               title={article.title}
               publishedAt={new Date(article.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -39,7 +37,7 @@ const SavedNewsCardsList = ({ isLoggedIn }) => {
               isLoggedIn={isLoggedIn}
               currentUser={currentUser}
               url={article.url}
-              onArticleDelete={() => handleArticleDelete(article.url)}
+              onArticleDelete={() => handleArticleDelete(article._id)}
             />
           ))
         ) : (

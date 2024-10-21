@@ -6,7 +6,6 @@ function PopupWithForm({
   children,
   isOpen,
   handleActiveModalClose,
-  onSubmit,
   title,
 }) {
   const modalRef = useRef();

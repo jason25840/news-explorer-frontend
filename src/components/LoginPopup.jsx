@@ -3,7 +3,6 @@ import "../styles/PopupWithForm.css";
 import { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-
 const LoginPopup = ({
   isOpen,
   handleActiveModalClose,
@@ -20,17 +19,20 @@ const LoginPopup = ({
     resetForm, 
   } = useFormAndValidation();
 
-
   useEffect(() => {
     if (isOpen) {
-      resetForm();
+      resetForm(); 
     }
   }, [isOpen, resetForm]);
-
+  
   const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleLogin(values.email, values.password);
-  }
+    e.preventDefault(); 
+    handleLogin(values.email, values.password) 
+      .catch((error) => { 
+        console.error('Login failed:', error);
+        alert('Login failed. Please try again.');
+      });
+  };
   
   return (
     <PopupWithForm

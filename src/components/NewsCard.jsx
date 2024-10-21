@@ -6,20 +6,20 @@ import hoveredBookMark from '../images/hoveredBookmark.svg';
 import selectedBookMark from '../images/selectedBookmark.svg';
 import trash from '../images/trash.svg';
 import hoveredTrash from '../images/hoveredTrash.svg';
-import { deleteUserArticle, saveUserArticle } from '../mockData/SavedArticles';
 import { currentPageContext } from '../contexts/currentPageContext';
+import { saveArticle } from '../utils/api';
 
-const NewsCard = ({ source, title, publishedAt, description, urlToImage, isLoggedIn, url, onArticleDelete, keyword, currentUser }) => {
+const NewsCard = ({ id, source, title, publishedAt, description, urlToImage, isLoggedIn, url, onArticleDelete, keyword, currentUser }) => {
   const { currentPage } = useContext(currentPageContext);
-
   const [isHovered, setIsHovered] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [isSaved, setIsSaved] = useState(false); 
 
   useEffect(() => { 
     if (isLoggedIn && currentUser) {
-      const isArticleSaved = currentUser.savedArticles.some(article => article.url === url);
+      const isArticleSaved = currentUser.savedArticles?.some(article => article.url === url);
       setIsSaved(isArticleSaved);
+      setIsSelected(isArticleSaved);
     }
   }, [isLoggedIn, currentUser, url]);
 
@@ -28,15 +28,25 @@ const NewsCard = ({ source, title, publishedAt, description, urlToImage, isLogge
       console.error("User email is undefined, cannot save or delete the article.");
       return;
     }
-    if (isSaved) {
-      deleteUserArticle(currentUser.email, url);
-      setIsSaved(false); 
-      if (onArticleDelete) {
-      onArticleDelete(url);
-      } 
+    try {
+      if (isSaved) { 
+      setIsSaved(false);
+      setIsSelected(false);
     } else {
-      saveUserArticle(currentUser.email, { source, title, publishedAt, description, urlToImage, url, keyword });
-      setIsSaved(true);  
+      saveArticle ({
+        source: source?.name || 'Unknown',
+        title,
+        text: description,
+        date: publishedAt,
+        keyword,
+        link: url,  
+        image: urlToImage,
+        });
+      setIsSaved(true);
+      setIsSelected(true);
+    }
+    } catch (error) {
+      console.error('Failed to save article:', error);
     }
   };
 
@@ -50,8 +60,6 @@ const NewsCard = ({ source, title, publishedAt, description, urlToImage, isLogge
       handleSave(); 
     }
   };
-
-  console.log({source})
 
   return (
     <div className="news-card">
@@ -92,7 +100,7 @@ const NewsCard = ({ source, title, publishedAt, description, urlToImage, isLogge
           <button
             className="news-card_action-icon"
             onClick={() => {
-              handleSave(); 
+              onArticleDelete(); 
             }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}

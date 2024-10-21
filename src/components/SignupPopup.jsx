@@ -21,23 +21,22 @@ const SignupPopup = ({
         resetForm, 
       } = useFormAndValidation();
 
-  useEffect(() => {
-    if (isOpen) {
-      resetForm();
-    }
-  }, [isOpen, resetForm]);
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    if (isValid) {
-    handleRegistration(values)
-      .then(() => {
-      handleOpenSuccessPopup();
-  })
-  .catch((error) => {
-    console.log("Registration failed:", error);
-  });
-}
-};
+      useEffect(() => {
+        if (isOpen) {
+          resetForm(); // Reset form fields when the popup opens
+        }
+      }, [isOpen, resetForm]);
+      
+      const handleFormSubmit = (e) => {
+        e.preventDefault(); // Prevent page reload on form submission
+        if (isValid) { // Ensure form is valid before submitting
+          handleRegistration(values.email, values.password, values.name)
+            .catch((error) => { // Catch any errors from handleRegistration
+              console.error('Registration failed:', error);
+              alert('Registration failed. Please try again.');
+            });
+        }
+      };
 
   return (
     <PopupWithForm
@@ -92,20 +91,20 @@ const SignupPopup = ({
       >
         Username
         <input
-          name="userName"
-          className={`popup__input ${isTyping.userName ? 'popup__input_active' : ''} ${
-            errors.userName ? 'popup__input_invalid' : ''
+          name="name"
+          className={`popup__input ${isTyping.name ? 'popup__input_active' : ''} ${
+            errors.name ? 'popup__input_invalid' : ''
           }`}
           type="text"
-          id="userName"
+          id="name"
           placeholder="Enter Your Username"
-          value={values.userName || ""}
+          value={values.name || ""}
           onChange={handleChange}
           minLength="2"
           maxLength="16"
           required
         />
-        {errors.userName && <p className="popup__input_invalid">{errors.userName}</p>}
+        {errors.name && <p className="popup__input_invalid">{errors.name}</p>}
       </label>
 
       <div className="popup__submit-btn-container">
