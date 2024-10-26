@@ -1,8 +1,0 @@
- const handleSave = (article) => {
-    if (isLoggedIn && currentUser) {
-      const savedArticles = saveUserArticle(currentUser.email, article);
-      console.log('Saved articles for user:', savedArticles);
-    } else {
-      handleOpenLoginPopup();
-    }
-  };

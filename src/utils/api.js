@@ -5,7 +5,7 @@ export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
 export const removeToken = () => localStorage.removeItem(TOKEN_KEY);
 
-//const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Error ${res.statusText}`);
+//git add const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Error ${res.statusText}`);
 const checkResponse = (response, data) => {
   if (!response.ok) {
     return Promise.reject(data || new Error(`Error: ${response.statusText}`));
@@ -27,7 +27,6 @@ const request = (url, options = {}) => {
   return fetch(`${BASE_URL}${url}`, { ...options, headers })
     .then(async (response) => {
       if (response.status === 204) {
-        // Handle empty response (204 No Content)
         return null;
       }
       const data = await response.json();
@@ -51,7 +50,6 @@ export const login = (email, password) =>
   });
 
   export const logout = () => {
-    console.log('Making logout request');
     return request('/api/logout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

@@ -121,7 +121,6 @@ function App(setErrors) {
 
   const handleLogout = async () => {
     try {
-      console.log('Attempting to log out');
       await api.logout(); 
       localStorage.removeItem('currentUser');
       setCurrentUser(null);
