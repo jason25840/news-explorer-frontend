@@ -17,6 +17,7 @@ const LoginPopup = ({
     isValid,
     isTyping,
     resetForm, 
+    isLoading,
   } = useFormAndValidation();
 
   useEffect(() => {
@@ -48,8 +49,8 @@ const LoginPopup = ({
         Email
         <input
           name="email"
-          className={`popup__input ${isTyping.email ? 'popup__input_active' : ''} ${
-            errors.email ? 'popup__input_invalid' : ''
+          className={`popup__input ${isTyping.email ? 'popup__input--active' : ''} ${
+            errors.email ? 'popup__input--invalid' : ''
           }`}
           type="email"
           id="email"
@@ -60,7 +61,7 @@ const LoginPopup = ({
           maxLength="40"
           required
         />
-        {errors.email && <p className="popup__input_invalid">{errors.email}</p>}
+        {errors.email && <p className="popup__input--invalid">{errors.email}</p>}
       </label>
 
       <label
@@ -69,8 +70,8 @@ const LoginPopup = ({
         Password
         <input
           name="password"
-          className={`popup__input ${isTyping.password ? 'popup__input_active' : ''} ${
-            errors.password ? 'popup__input_invalid' : ''
+          className={`popup__input ${isTyping.password ? 'popup__input--active' : ''} ${
+            errors.password ? 'popup__input--invalid' : ''
           }`}
           type="password"
           id="password"
@@ -81,16 +82,15 @@ const LoginPopup = ({
           maxLength="16"
           required
         />
-        {errors.password && <p className="popup__input_invalid">{errors.password}</p>}
+        {errors.password && <p className="popup__input--invalid">{errors.password}</p>}
       </label>
       <div className="popup__submit-btn-container">
         <button
           type="submit"
-          className={`popup__submit-btn ${isValid ? "popup__submit-btn_active" : ""}`}
-          disabled={!isValid}
-          onClick={handleFormSubmit}
+          className={`popup__submit-btn ${isValid ? "popup__submit-btn--active" : ""}`}
+          disabled={!isValid || isLoading}
         >
-          Sign in
+         {isLoading ? "Signing in..." : "Sign In"}
         </button>
         <button
           type="button"

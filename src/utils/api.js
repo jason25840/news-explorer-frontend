@@ -5,7 +5,13 @@ export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
 export const removeToken = () => localStorage.removeItem(TOKEN_KEY);
 
-const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Error ${res.statusText}`);
+//const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Error ${res.statusText}`);
+const checkResponse = (response, data) => {
+  if (!response.ok) {
+    return Promise.reject(data || new Error(`Error: ${response.statusText}`));
+  }
+  return data;
+};
 
 const request = (url, options = {}) => {
   const token = getToken();
@@ -13,13 +19,20 @@ const request = (url, options = {}) => {
     'Content-Type': 'application/json',
     ...options.headers,
   };
-  
+
   if (token) {
     headers.authorization = `Bearer ${token}`;
   }
 
   return fetch(`${BASE_URL}${url}`, { ...options, headers })
-  .then(checkResponse);
+    .then(async (response) => {
+      if (response.status === 204) {
+        // Handle empty response (204 No Content)
+        return null;
+      }
+      const data = await response.json();
+      return checkResponse(response, data);
+    });
 };
 
 export const register = (email, password, name) => 
@@ -37,7 +50,16 @@ export const login = (email, password) =>
     return data;
   });
 
-export const logout = () => removeToken();
+  export const logout = () => {
+    console.log('Making logout request');
+    return request('/api/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(() => {
+      removeToken(); 
+    });
+  };
 
 export const getUser = () => request('/api/users/me', { method: 'GET' });
 

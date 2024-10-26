@@ -7,6 +7,7 @@ function PopupWithForm({
   isOpen,
   handleActiveModalClose,
   title,
+  onSubmit,
 }) {
   const modalRef = useRef();
 
@@ -31,7 +32,7 @@ function PopupWithForm({
         >
           <img src={close} alt="close" />
         </button>
-        <form className="popup__form"> 
+        <form className="popup__form" onSubmit={onSubmit}> 
           {children}
         </form>
       </div>

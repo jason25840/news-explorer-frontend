@@ -3,51 +3,54 @@ import { useState, useCallback } from 'react';
 function useFormAndValidation() {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
   const [isTyping, setIsTyping] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setIsTyping({ ...isTyping, [name]: value !== "" });
-    
-    // Update input values
-    setValues({ ...values, [name]: value });
+    setIsTyping((prev) => ({ ...prev, [name]: value !== '' }));
 
-    // Custom error messages
+    setValues((prev) => ({ ...prev, [name]: value }));
+
     if (name === "email") {
-      if (value.length < 2 || value.length > 40) {
-        setErrors({ ...errors, email: "Invalid email address" });
-      } else {
-        setErrors({ ...errors, email: "" });
-      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      setErrors((prev) => ({
+        ...prev,
+        email: emailRegex.test(value) ? "" : "Invalid email format",
+      }));
     } else if (name === "password") {
-      if (value.length < 2 || value.length > 16) {
-        setErrors({ ...errors, password: "Invalid password. Must be between 2 and 16 characters" });
-      } else {
-        setErrors({ ...errors, password: "" });
-      }
-    } else if (name === "userName") {
-      if (value.length < 2 || value.length > 16) {
-        setErrors({ ...errors, userName: "Invalid username. Must be between 2 and 16 characters" });
-      } else {
-        setErrors({ ...errors, userName: "" });
-      }
+      setErrors((prev) => ({
+        ...prev,
+        password: value.length >= 8 ? "" : "Password must be at least 8 characters long",
+      }));
+    } else if (name === "name") {
+      setErrors((prev) => ({
+        ...prev,
+        name: value.length >= 2 && value.length <= 30
+          ? ""
+          : "Name must be between 2 and 30 characters long",
+      }));
     } else {
-      setErrors({ ...errors, [name]: e.target.validationMessage });
+      setErrors((prev) => ({
+        ...prev,
+        [name]: e.target.validationMessage,
+      }));
     }
 
-    // Update form validity
     setIsValid(e.target.closest('form').checkValidity());
   };
 
-  const resetForm = useCallback((newValues = {}, newErrors = {}, newIsValid = false) => {
-    setValues(newValues);
-    setErrors(newErrors);
-    setIsValid(newIsValid);
-    setIsTyping({});
-  }, [setValues, setErrors, setIsValid, setIsTyping]);
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+      setIsTyping({});
+    },
+    []
+  );
 
-  return { values, handleChange, errors, isValid, resetForm, setValues, setIsValid, isTyping };
+  return { values, handleChange, errors, isValid, resetForm, isTyping };
 }
 
-export { useFormAndValidation }; 
+export { useFormAndValidation };

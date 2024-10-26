@@ -19,7 +19,7 @@ import SignupPopup from './SignupPopup';
 import SuccessPopup from './SuccessPopup';
 import * as api from '../utils/api';
 
-function App() {
+function App(setErrors) {
   const [activeModal, setActiveModal] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({ name: 'John' });
@@ -37,7 +37,7 @@ function App() {
           setCurrentUser(user);
           setIsLoggedIn(true);
         })
-        .catch(() => api.logout()); // Handle invalid token
+        .catch(() => api.logout()); 
     }
   }, []);
 
@@ -74,44 +74,63 @@ function App() {
   };
 
   const handleRegistration = (email, password, name) => {
-    return api.register(email, password, name) 
-      .then((data) => {
-        handleOpenSuccessPopup(); 
-      })
+    return api
+      .register(email, password, name)
+      .then(() => handleOpenSuccessPopup())
       .catch((error) => {
-        console.error('Signup failed:', error);
-        alert('Registration failed. Please try again.');
-        throw error; 
+        if (error.response && error.response.status === 400) {
+          const backendErrors = error.response.data.details || {};
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            ...backendErrors,
+          }));
+        } else {
+          console.error("Signup failed:", error);
+          alert("Registration failed. Please try again.");
+        }
+        throw error;
       });
   };
+  
   const handleLogin = (email, password) => {
-    return api.login(email, password) 
+    return api
+      .login(email, password)
       .then((data) => {
-      if (data.token) {
-        api.setToken(data.token); 
-        return api.getUser();
-       } else {
-        throw new Error('Token not provided');
-       } 
+        if (data.token) {
+          api.setToken(data.token);
+          return api.getUser();
+        } else {
+          throw new Error("Token not provided");
+        }
       })
       .then((user) => {
-        setCurrentUser(user); 
-        setIsLoggedIn(true); 
+        setCurrentUser(user);
+        setIsLoggedIn(true);
         handleActiveModalClose();
       })
       .catch((error) => {
-        console.error('Login failed:', error);
-        alert('Invalid email or password'); 
-        throw error; 
+        if (error.response && error.response.status === 401) {
+          setErrors({ general: "Invalid email or password" });
+        } else {
+          console.error("Login failed:", error);
+          alert("Login failed. Please try again.");
+        }
+        throw error;
       });
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('currentUser');  
-    setCurrentUser(null); 
+  const handleLogout = async () => {
+    try {
+      console.log('Attempting to log out');
+      await api.logout(); 
+      localStorage.removeItem('currentUser');
+      setCurrentUser(null);
+      setIsLoggedIn(false);
+      setCurrentPage('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
-  
 
   useEffect(() => {
     function handleKeyDown(e) {
@@ -181,21 +200,17 @@ function App() {
             </Routes>
             <PopupWithForm />
             <LoginPopup  
-                //title="login"
                 isOpen={activeModal === "login"}
                 handleActiveModalClose={handleActiveModalClose}
                 handleLogin={handleLogin}
                 handleOpenSignupPopup={handleOpenSignupPopup}
-                //isLoading={isLoading}
             />
             <SignupPopup
-            //title="signup"
               isOpen={activeModal === "signup"}
               handleActiveModalClose={handleActiveModalClose}
               handleRegistration={handleRegistration}
               handleOpenLoginPopup={handleOpenLoginPopup}
               handleOpenSuccessPopup={handleOpenSuccessPopup}
-            //isLoading={isLoading}
             />
             <SuccessPopup
               isOpen={activeModal === "success"}

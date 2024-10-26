@@ -1,58 +1,45 @@
 import { useEffect } from "react"; 
-import { useFormAndValidation } from "../Hooks/useFormAndValidation";
-
 import "../styles/PopupWithForm.css";
 import PopupWithForm from "./PopupWithForm";
+import { useHandleFormSubmit } from "../Hooks/useHandleFormSubmit";
 
 const SignupPopup = ({
   isOpen,
   handleActiveModalClose,
   handleRegistration,
   handleOpenLoginPopup,
-  handleOpenSuccessPopup,
-  //isLoading,
 }) => {
-    const {
-        values,
-        handleChange,
-        errors,
-        isValid,
-        isTyping,
+      const { 
+        values, 
+        handleChange, 
+        errors, 
+        isValid, 
         resetForm, 
-      } = useFormAndValidation();
-
-      useEffect(() => {
-        if (isOpen) {
-          resetForm(); // Reset form fields when the popup opens
-        }
-      }, [isOpen, resetForm]);
-      
-      const handleFormSubmit = (e) => {
-        e.preventDefault(); // Prevent page reload on form submission
-        if (isValid) { // Ensure form is valid before submitting
-          handleRegistration(values.email, values.password, values.name)
-            .catch((error) => { // Catch any errors from handleRegistration
-              console.error('Registration failed:', error);
-              alert('Registration failed. Please try again.');
-            });
-        }
-      };
+        onSubmit, 
+        isLoading,
+        isTyping
+       } =
+      useHandleFormSubmit(({ email, password, name }) =>
+        handleRegistration(email, password, name)
+      );
+    
+    useEffect(() => {
+      if (isOpen) resetForm();
+    }, [isOpen, resetForm]);
 
   return (
     <PopupWithForm
       title="Sign up"
       isOpen={isOpen}
       handleActiveModalClose={handleActiveModalClose}
-      onSubmit={handleFormSubmit}
+      onSubmit={onSubmit}
     >
-      <label
-        className="popup__label"
-      >
+      <label className="popup__label">
         Email
         <input
           name="email"
-          className={`popup__input ${isTyping.email ? 'popup__input_active' : ''} ${
-            errors.email ? 'popup__input_invalid' : ''
+          className={`popup__input ${isTyping?.email ? 'popup__input--active' : ''} ${
+            errors.email ? 'popup__input--invalid' : ''
           }`}
           type="email"
           id="signup-email"
@@ -63,7 +50,7 @@ const SignupPopup = ({
           maxLength="40"
           required
         />
-        {errors.email && <p className="popup__input_invalid">{errors.email}</p>}
+        {errors.email && <p className="popup__input--invalid">{errors.email}</p>}
       </label>
 
       <label
@@ -72,19 +59,19 @@ const SignupPopup = ({
         Password
         <input
           name="password"
-          className={`popup__input ${isTyping.password ? 'popup__input_active' : ''} ${
-            errors.password ? 'popup__input_invalid' : ''
+          className={`popup__input ${isTyping?.password ? 'popup__input--active' : ''} ${
+            errors.password ? 'popup__input--invalid' : ''
           }`}
           type="password"
           id="register-password"
           placeholder="Password"
           value={values.password || ""}
           onChange={handleChange}
-          minLength="2"
+          minLength="8"
           maxLength="16"
           required
         />
-        {errors.password && <p className="popup__input_invalid">{errors.password}</p>}
+        {errors.password && <p className="popup__input--invalid">{errors.password}</p>}
       </label>
       <label
         className="popup__label"
@@ -92,8 +79,8 @@ const SignupPopup = ({
         Username
         <input
           name="name"
-          className={`popup__input ${isTyping.name ? 'popup__input_active' : ''} ${
-            errors.name ? 'popup__input_invalid' : ''
+          className={`popup__input ${isTyping?.name ? 'popup__input--active' : ''} ${
+            errors.name ? 'popup__input--invalid' : ''
           }`}
           type="text"
           id="name"
@@ -104,17 +91,16 @@ const SignupPopup = ({
           maxLength="16"
           required
         />
-        {errors.name && <p className="popup__input_invalid">{errors.name}</p>}
+        {errors.name && <p className="popup__input--invalid">{errors.name}</p>}
       </label>
 
       <div className="popup__submit-btn-container">
         <button
           type="submit"
-          className={`popup__submit-btn ${isValid ? "popup__submit-btn_active" : ""}`}
-          disabled={!isValid}
-          onClick={handleFormSubmit}
+          className={`popup__submit-btn ${isValid ? "popup__submit-btn--active" : ""}`}
+          disabled={!isValid || isLoading}
         >
-            Sign up
+           {isLoading ? "Signing up..." : "Sign up"}
         </button>
         <button
           className="popup__option-btn"

@@ -81,6 +81,7 @@
     line-height: 16.94px;
     color: #00000033;
     width: 100%;
+    transition: color 0.3s ease, border-color 0.3s ease;
   }
   
   .popup__input--active {
@@ -89,6 +90,13 @@
   
   .popup__input--invalid {
     color: red;
+    border-bottom-color: red;
+  }
+
+  .popup__input--active .popup__input--invalid {
+    color: red;
+    border-bottom-color: red;
+    transition: color 0.3s ease, border-color 0.3s ease;
   }
   
   .popup__submit-btn-container {
