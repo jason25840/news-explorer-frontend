@@ -1,23 +1,13 @@
-// ProtectedRoute.jsx
-import { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 
-const ProtectedRoute = ({ isLoggedIn, handleOpenLoginPopup }) => {
-  const [isCheckingAuth, setIsCheckingAuth] = useState(false);
+const ProtectedRoute = ({ isLoggedIn }) => {
   const location = useLocation();
 
-  useEffect(() => {
     if (!isLoggedIn) {
-      handleOpenLoginPopup(); // Open login popup if not logged in
+      return <Navigate to="/" replace state={{ from: location }} />; 
     }
-    setIsCheckingAuth(false); // Mark auth check as complete
-  }, [isLoggedIn, handleOpenLoginPopup]);
-
-  if (isCheckingAuth) {
-    return null; // Prevent flash during auth check
-  }
-
-  return isLoggedIn ? <Outlet /> : <Navigate to="/" replace state={{ from: location }} />;
+   
+    return <Outlet />
 };
 
 export default ProtectedRoute;

@@ -19,6 +19,7 @@ import SignupPopup from './SignupPopup';
 import SuccessPopup from './SuccessPopup';
 //import ProtectedRoute from './ProtectedRoute';
 import * as api from '../utils/api';
+import ProtectedRoute from './ProtectedRoute';
 
 function App(setErrors) {
   const [activeModal, setActiveModal] = useState("");
@@ -178,30 +179,29 @@ function App(setErrors) {
                 </> 
                } 
                />
-                  <Route 
-                    path="/saved-articles" 
-                    element={
-                      //<ProtectedRoute 
-                      //isLoggedIn={isLoggedIn} 
-                      //handleOpenLoginPopup={handleOpenLoginPopup}
-                      //>
-                      <>
-                      <Header 
-                      handleOpenLoginPopup={handleOpenLoginPopup} 
+                  <Route element={<ProtectedRoute
                       isLoggedIn={isLoggedIn} 
-                      currentUser={currentUser} 
-                      handleLogout={handleLogout} 
-                      />
-                      <SavedNews 
-                        isLoggedIn={isLoggedIn}
+                      handleOpenLoginPopup={handleOpenLoginPopup}/>}>
+                    <Route 
+                      path="/saved-articles" 
+                      element={
+                        <>
+                        <Header 
+                        handleOpenLoginPopup={handleOpenLoginPopup} 
+                        isLoggedIn={isLoggedIn} 
                         currentUser={currentUser} 
-                        handleLogout={handleLogout}
-                        keyword={currentKeyword} 
+                        handleLogout={handleLogout} 
+                        />
+                        <SavedNews 
+                          isLoggedIn={isLoggedIn}
+                          currentUser={currentUser} 
+                          handleLogout={handleLogout}
+                          keyword={currentKeyword} 
+                        />
+                        </>
+                        }
                       />
-                      </>
-                      //</ProtectedRoute>
-                    }
-                  />
+                      </Route>
             </Routes>
             <PopupWithForm />
             <LoginPopup  
