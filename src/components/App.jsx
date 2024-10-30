@@ -17,6 +17,7 @@ import PopupWithForm from './PopupWithForm';
 import LoginPopup from './LoginPopup';
 import SignupPopup from './SignupPopup';
 import SuccessPopup from './SuccessPopup';
+//import ProtectedRoute from './ProtectedRoute';
 import * as api from '../utils/api';
 
 function App(setErrors) {
@@ -28,7 +29,7 @@ function App(setErrors) {
   const [currentKeyword, setCurrentKeyword] = useState('');
 
   const location = useLocation();
-
+  
   useEffect(() => {
     const token = api.getToken();
     if (token) {
@@ -180,6 +181,10 @@ function App(setErrors) {
                   <Route 
                     path="/saved-articles" 
                     element={
+                      //<ProtectedRoute 
+                      //isLoggedIn={isLoggedIn} 
+                      //handleOpenLoginPopup={handleOpenLoginPopup}
+                      //>
                       <>
                       <Header 
                       handleOpenLoginPopup={handleOpenLoginPopup} 
@@ -187,15 +192,16 @@ function App(setErrors) {
                       currentUser={currentUser} 
                       handleLogout={handleLogout} 
                       />
-                  <SavedNews 
-                    isLoggedIn={isLoggedIn}
-                    currentUser={currentUser} 
-                    handleLogout={handleLogout}
-                    keyword={currentKeyword} 
+                      <SavedNews 
+                        isLoggedIn={isLoggedIn}
+                        currentUser={currentUser} 
+                        handleLogout={handleLogout}
+                        keyword={currentKeyword} 
+                      />
+                      </>
+                      //</ProtectedRoute>
+                    }
                   />
-              </>
-            }
-            />
             </Routes>
             <PopupWithForm />
             <LoginPopup  

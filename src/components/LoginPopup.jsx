@@ -8,7 +8,6 @@ const LoginPopup = ({
   handleActiveModalClose,
   handleLogin,
   handleOpenSignupPopup,
-  //isLoading,
 }) => {
   const {
     values,

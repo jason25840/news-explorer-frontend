@@ -9,7 +9,7 @@ import hoveredTrash from '../images/hoveredTrash.svg';
 import { currentPageContext } from '../contexts/currentPageContext';
 import { saveArticle } from '../utils/api';
 
-const NewsCard = ({ id, source, title, publishedAt, description, urlToImage, isLoggedIn, url, onArticleDelete, keyword, currentUser }) => {
+const NewsCard = ({ source, title, publishedAt, description, urlToImage, isLoggedIn, url, onArticleDelete, keyword, currentUser }) => {
   const { currentPage } = useContext(currentPageContext);
   const [isHovered, setIsHovered] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
@@ -34,7 +34,7 @@ const NewsCard = ({ id, source, title, publishedAt, description, urlToImage, isL
       setIsSelected(false);
     } else {
       saveArticle ({
-        source: source?.name || 'Unknown',
+        source: source || 'Unknown',
         title,
         text: description,
         date: publishedAt,
@@ -44,6 +44,7 @@ const NewsCard = ({ id, source, title, publishedAt, description, urlToImage, isL
         });
       setIsSaved(true);
       setIsSelected(true);
+        
     }
     } catch (error) {
       console.error('Failed to save article:', error);
