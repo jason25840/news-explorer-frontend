@@ -46,7 +46,7 @@ NewsExplorer is a responsive web application where users can search for and book
     Clone the repository:
 
     ```bash
-    git clone https://github.com/jknight25840/news-explorer-frontend.git
+    git clone https://github.com/jason25840/news-explorer-frontend.git
     cd news-explorer-frontend
 
 2.	Install Dependencies:
