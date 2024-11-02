@@ -28,8 +28,8 @@ NewsExplorer is a responsive web application where users can search for and book
 
 ## The project is deployed on Google Cloud with the following domain configuration:
 
-	- Frontend: [https://newsexplorer.hackquest.com](https://newsexplorer.hackquest.com) or [https://www.newsexplorer.hackquest.com](https://www.newsexplorer.hackquest.com)
-    - Backend: [https://api.newsexplorer.hackquest.com](https://api.newsexplorer.hackquest.com)
+- Frontend: [https://newsexplorer.hackquest.com](https://newsexplorer.hackquest.com) or [https://www.newsexplorer.hackquest.com](https://www.newsexplorer.hackquest.com)
+- Backend: [https://api.newsexplorer.hackquest.com](https://api.newsexplorer.hackquest.com)
 
 ## SSL encryption is handled via Certbot, ensuring secure communication over HTTPS.
 
