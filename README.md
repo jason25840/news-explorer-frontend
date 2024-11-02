@@ -28,8 +28,8 @@ NewsExplorer is a responsive web application where users can search for and book
 
 ## The project is deployed on Google Cloud with the following domain configuration:
 
-	•	Frontend: https://newsexplorer.hackquest.com or https://www.newsexplorer.hackquest.com
-	•	Backend: https://api.newsexplorer.hackquest.com
+	- Frontend: [https://newsexplorer.hackquest.com](https://newsexplorer.hackquest.com) or [https://www.newsexplorer.hackquest.com](https://www.newsexplorer.hackquest.com)
+    - Backend: [https://api.newsexplorer.hackquest.com](https://api.newsexplorer.hackquest.com)
 
 ## SSL encryption is handled via Certbot, ensuring secure communication over HTTPS.
 
@@ -37,13 +37,16 @@ NewsExplorer is a responsive web application where users can search for and book
 
 	•	Node.js (>= 14.x)
 	•	npm (>= 6.x)
-	•	NewsAPI Key: Sign up for NewsAPI to obtain a free API key.
+	•	NewsAPI Key: Sign up for [NewsAPI](https://newsapi.org/) to obtain a free API key.
 
 ## Installation
 
 1.	Clone the Repository:
 
-    git clone https://github.com/yourusername/news-explorer-frontend.git
+    Clone the repository:
+
+    ```bash
+    git clone https://github.com/jknight25840/news-explorer-frontend.git
     cd news-explorer-frontend
 
 2.	Install Dependencies:
@@ -139,6 +142,6 @@ This project is a frontend React app connected to an Express.js backend. Both pa
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT](https://opensource.org/licenses/MIT) License.
 
 This README should be ready to paste directly into your project! Let me know if you’d like to add any extra details.
