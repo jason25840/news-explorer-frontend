@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:3001';
+import { BASE_URL } from './constants';
+
 const TOKEN_KEY = 'jwt';
 
 export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
