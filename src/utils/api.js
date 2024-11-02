@@ -5,7 +5,6 @@ export const setToken = (token) => localStorage.setItem(TOKEN_KEY, token);
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
 export const removeToken = () => localStorage.removeItem(TOKEN_KEY);
 
-//git add const checkResponse = (res) => res.ok ? res.json() : Promise.reject(`Error ${res.statusText}`);
 const checkResponse = (response, data) => {
   if (!response.ok) {
     return Promise.reject(data || new Error(`Error: ${response.statusText}`));
@@ -41,7 +40,7 @@ export const register = (email, password, name) =>
   });
 
 export const login = (email, password) => 
-  request('/api/login', {
+  request('/api/signin', {
     method: 'POST',
     body: JSON.stringify({ email, password }),
   }).then(data => {
