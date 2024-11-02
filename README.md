@@ -1,8 +1,8 @@
-##NewsExplorer Frontend
+## NewsExplorer Frontend
 
 NewsExplorer is a responsive web application where users can search for and bookmark articles by keyword. Users can sign up to save and manage their own collections of articles, with permissions to delete only their saved items. The frontend of this application is built with React, utilizing Context API and hooks for state management. It works alongside an Express.js backend and is deployed on Google Cloud.
 
-##Project Features
+## Project Features
 
 	•	Search for Articles: Leverages the NewsAPI to allow users to search articles by keywords.
 	•	User Authentication: Users can register and log in to the platform to save articles.
@@ -11,35 +11,35 @@ NewsExplorer is a responsive web application where users can search for and book
 	•	Protected Routes: Users need to log in to access saved articles and bookmark features.
 	•	Fully Deployed: The application is hosted on Google Cloud, with secure HTTPS access.
 
-##Tech Stack
+## Tech Stack
 
 	•	Frontend: React (with Context API and Hooks)
 	•	Backend: NewsExplorer Backend (Express.js, Node.js, MongoDB)
 	•	API: NewsAPI for fetching live news articles.
 	•	Deployment: Google Cloud Platform with HTTPS provided by Certbot
 
-##Project Structure
+## Project Structure
 
 	•	React Context: Manages global states such as CurrentUser and SavedArticles.
 	•	React Hooks: Used extensively for handling component states and lifecycle methods.
 	•	React Router: Version 6 for client-side routing and protected routes.
 
-##Deployment and Domain
+## Deployment and Domain
 
-##The project is deployed on Google Cloud with the following domain configuration:
+## The project is deployed on Google Cloud with the following domain configuration:
 
 	•	Frontend: https://newsexplorer.hackquest.com or https://www.newsexplorer.hackquest.com
 	•	Backend: https://api.newsexplorer.hackquest.com
 
-##SSL encryption is handled via Certbot, ensuring secure communication over HTTPS.
+## SSL encryption is handled via Certbot, ensuring secure communication over HTTPS.
 
-##Requirements
+## Requirements
 
 	•	Node.js (>= 14.x)
 	•	npm (>= 6.x)
 	•	NewsAPI Key: Sign up for NewsAPI to obtain a free API key.
 
-##Installation
+## Installation
 
 1.	Clone the Repository:
 
@@ -63,23 +63,23 @@ NewsExplorer is a responsive web application where users can search for and book
 
     npm run build
 
-##Scripts
+## Scripts
 
-##The project includes the following npm scripts:
+## The project includes the following npm scripts:
 
 	•	npm start: Starts the development server.
 	•	npm run build: Builds the app for production.
 	•	npm test: Launches the test runner.
 	•	npm run eject: Ejects the app from react-scripts.
 
-##Dependencies
+## Dependencies
 
 	•	React: A JavaScript library for building user interfaces.
 	•	React Router: Handles routing for seamless page navigation.
 	•	NewsAPI: Fetches articles based on user-entered keywords.
 	•	Jest & Testing Library: For component testing.
 
-##Project Configuration (package.json)
+## Project Configuration (package.json)
 
 {
   "name": "news-explorer-frontend",
@@ -115,7 +115,7 @@ NewsExplorer is a responsive web application where users can search for and book
   }
 }
 
-##API Endpoints
+## API Endpoints
 
 	•	GET /articles - Fetches articles based on keywords from NewsAPI.
 	•	POST /signup - Registers a new user.
@@ -123,21 +123,21 @@ NewsExplorer is a responsive web application where users can search for and book
 	•	POST /articles - Saves an article to the user’s account (requires authentication).
 	•	DELETE /articles/:id - Deletes a user’s saved article (requires authentication).
 
-##Additional Information
+## Additional Information
 
 This project is a frontend React app connected to an Express.js backend. Both parts are required for full functionality, especially for user registration, login, and article management.
 
-##Troubleshooting
+## Troubleshooting
 
 	•	Ensure the .env file is set up correctly with valid API keys.
 	•	Make sure the backend server is running and accessible at the configured API URL.
 
-##Future Improvements
+## Future Improvements
 
 	•	Add more user customization options for saved articles.
 	•	Implement additional API calls for trending news and other categories.
 
-##License
+## License
 
 This project is licensed under the MIT License.
 
