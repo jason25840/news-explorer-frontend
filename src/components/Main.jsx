@@ -21,7 +21,7 @@ const Main = ({ handleOpenLoginPopup, isLoggedIn }) => {
     setHasSearched(true);
     setKeyword(searchKeyword);
 
-    fetch(`https://newsapi.org/v2/everything?q=${searchKeyword}&apiKey=${APIkey}`)
+    fetch(`https://nomoreparties.co/news/v2/everything?q=${searchKeyword}&apiKey=${APIkey}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.articles.length > 0) {
