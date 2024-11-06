@@ -1,3 +1,3 @@
 import React from "react";
 
-export const hasSearchedContext = React.createContext();
+export const HasSearchedContext = React.createContext();

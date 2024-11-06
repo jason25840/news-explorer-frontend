@@ -1,4 +1,4 @@
-import { KeywordContext } from '../contexts/keywordContext';
+import { KeywordContext } from '../contexts/KeywordContext';
 import '../styles/KeyWordSearch.css';
 import { useState, useContext } from "react";
 

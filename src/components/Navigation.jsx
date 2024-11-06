@@ -1,13 +1,13 @@
 import '../styles/Navigation.css';
 import { useState, useEffect, useContext } from 'react';
-import { currentUserContext } from '../contexts/currentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { useLocation, Link } from 'react-router-dom';
 import logoutIcon from '../images/logout.svg'; 
 import blackLogoutIcon from '../images/black-logout.svg'; 
 import MobileMenuOverlay from './MobileMenuOverlay';
 
 const Navigation = ({ handleOpenLoginPopup, isLoggedIn, handleLogout }) => {
-    const { currentUser } = useContext(currentUserContext);
+    const { currentUser } = useContext(CurrentUserContext);
     const location = useLocation();
     const currentPage = location.pathname;
 

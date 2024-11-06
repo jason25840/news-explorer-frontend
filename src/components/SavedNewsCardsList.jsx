@@ -1,16 +1,15 @@
-import React from 'react';  
-import NewsCard from './NewsCard'; 
-import '../styles/NewsCardsList.css'; 
-import '../styles/SavedNewsCardsList.css';
-import { deleteArticle } from '../utils/api';
+import React from "react";
+import NewsCard from "./NewsCard";
+import "../styles/NewsCardsList.css";
+import "../styles/SavedNewsCardsList.css";
+import { deleteArticle } from "../utils/api";
 
-const SavedNewsCardsList = ({ 
+const SavedNewsCardsList = ({
   isLoggedIn,
   currentUser,
-  keyword,
   savedArticles,
-  setSavedArticles,}) => {
-
+  setSavedArticles,
+}) => {
   const handleArticleDelete = (id) => {
     deleteArticle(id)
       .then(() => {
@@ -18,14 +17,14 @@ const SavedNewsCardsList = ({
           prevArticles.filter((article) => article._id !== id)
         );
       })
-      .catch((err) => console.error('Failed to delete article:', err));
+      .catch((err) => console.error("Failed to delete article:", err));
   };
 
   return (
     <section className="saved-news">
       <div className="saved-news__cards">
         {savedArticles.length > 0 ? (
-          savedArticles.map((article, index) => (
+          savedArticles.map((article) => (
             <NewsCard
               key={article._id}
               source={article.source}
@@ -33,10 +32,10 @@ const SavedNewsCardsList = ({
               publishedAt={article.date}
               description={article.text}
               keyword={article.keyword}
-              urlToImage={article.urlToImage}
+              urlToImage={article.image}
               isLoggedIn={isLoggedIn}
               currentUser={currentUser}
-              url={article.url}
+              url={article.link}
               onArticleDelete={() => handleArticleDelete(article._id)}
             />
           ))
@@ -49,4 +48,3 @@ const SavedNewsCardsList = ({
 };
 
 export default SavedNewsCardsList;
-

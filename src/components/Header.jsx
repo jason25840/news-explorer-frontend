@@ -3,10 +3,10 @@ import '../styles/Header.css';
 import Navigation from './Navigation'; 
 import MobileMenuOverlay from './MobileMenuOverlay';
 import { useLocation } from 'react-router-dom';
-import { currentUserContext } from '../contexts/currentUserContext';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Header = ({ handleOpenLoginPopup, isLoggedIn, handleLogout }) => {
-    const currentUser = useContext(currentUserContext);
+    const currentUser = useContext(CurrentUserContext);
     const location = useLocation(); 
     const [isMenuOpen, setIsMenuOpen] = useState(false); 
 

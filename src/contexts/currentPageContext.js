@@ -1,3 +1,3 @@
 import React from "react";
 
-export const currentPageContext = React.createContext();
+export const CurrentPageContext = React.createContext();

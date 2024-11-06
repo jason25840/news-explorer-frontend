@@ -1,11 +1,11 @@
-import { useState, useContext } from 'react';
-import { currentUserContext } from '../contexts/currentUserContext';
-import NewsCard from './NewsCard'; 
-import '../styles/NewsCardsList.css';
+import { useState, useContext } from "react";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import NewsCard from "./NewsCard";
+import "../styles/NewsCardsList.css";
 
 const NewsCardsList = ({ articles, isLoggedIn, handleArticleDelete }) => {
   const [visibleArticles, setVisibleArticles] = useState(3);
-  const { currentUser } = useContext(currentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
 
   const handleShowMore = () => {
     setVisibleArticles((prevVisibleArticles) => prevVisibleArticles + 3);
@@ -33,10 +33,7 @@ const NewsCardsList = ({ articles, isLoggedIn, handleArticleDelete }) => {
         ))}
       </div>
       {visibleArticles < articles.length && (
-        <button 
-          className="news-cards__button" 
-          onClick={handleShowMore}
-        >
+        <button className="news-cards__button" onClick={handleShowMore}>
           Show more
         </button>
       )}
@@ -45,4 +42,3 @@ const NewsCardsList = ({ articles, isLoggedIn, handleArticleDelete }) => {
 };
 
 export default NewsCardsList;
-
